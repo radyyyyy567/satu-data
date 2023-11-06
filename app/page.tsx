@@ -1,5 +1,11 @@
+"use client";
 import Image from "next/image";
-import { badge, bannerWeb, logoSatuData, logoSatuDataIndonesia } from "./img";
+import { badge, bannerWeb, logoKotaBatam, logoSatuData, logoSatuDataIndonesia } from "./img";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function Home() {
   return (
@@ -171,7 +177,7 @@ export default function Home() {
         </div>
       </section>
       <section className="py-[60px]">
-        <div className="mx-auto max-w-5xl">
+        <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <div className="text-[32px] text-center font-semibold">
               Kategori
@@ -185,13 +191,106 @@ export default function Home() {
           <div className="text-center mt-6">
             Pilih data berdasarkan kategori urusan atau bidang
           </div>
+          <div className="-mx-[20px]">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={3}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+              pagination={{ type: "bullets" }}
+              modules={[Navigation, Pagination, Autoplay]}
+              className="h-[300px]"
+            >
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-8 h-8 text-blue-500"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+                    />
+                  </svg>
+                  <div className="font-bold">Pendidikan</div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-8 h-8 text-blue-500"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+                    />
+                  </svg>
+                  <div className="font-bold">Kesehatan</div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-8 h-8 text-blue-500"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+                    />
+                  </svg>
+                  <div className="font-bold">Pendidikan</div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-8 h-8 text-blue-500"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+                    />
+                  </svg>
+                  <div className="font-bold">Pendidikan</div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
         </div>
       </section>
       <section className="py-[60px]">
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <div className="text-[32px] text-center font-semibold">
-              Statistik Satu Data Kota Batam
+              Statistik Satu Data Kabupaten Pelalawan
             </div>
             <div className="flex items-center">
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
@@ -241,7 +340,9 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <div className="text-[36px] text-[#124364] font-semibold">10822</div>
+              <div className="text-[36px] text-[#124364] font-semibold">
+                10822
+              </div>
               <div>Total Data</div>
             </div>
             <div className="flex-col items-center flex text-center space-y-2">
@@ -264,6 +365,76 @@ export default function Home() {
               <div className="text-[36px] text-[#124364] font-semibold">61</div>
               <div>Instansi Produsen Data</div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-blue-500 bg-opacity-5 py-[60px]">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col items-center text-[#444] space-y-6">
+            <div className="text-[32px] text-center font-semibold">
+              Produsen Data
+            </div>
+            <div className="flex items-center">
+              <div className="bg-gray-400 h-[1px] w-[40px]"></div>
+              <div className="bg-blue-500 h-[3px] w-[40px]"></div>
+              <div className="bg-gray-400 h-[1px] w-[40px]"></div>
+            </div>
+          </div>
+          <div className="text-center mt-6">
+            Pilih data berdasarkan kategori urusan atau bidang
+          </div>
+          <div className="-mx-[20px]">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={3}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+              pagination={{ type: "bullets" }}
+              modules={[Navigation, Pagination, Autoplay]}
+              className="h-[400px]"
+            >
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
+                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <div>
+                    <div className="font-bold">Satuan Polisi Pamong Praja</div>
+                    <div className="text-[12px]">Produsen Data</div>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
+                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <div>
+                    <div className="font-bold">Satuan Polisi Pamong Praja</div>
+                    <div className="text-[12px]">Produsen Data</div>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
+                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <div>
+                    <div className="font-bold">Satuan Polisi Pamong Praja</div>
+                    <div className="text-[12px]">Produsen Data</div>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
+                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
+                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <div>
+                    <div className="font-bold">Satuan Polisi Pamong Praja</div>
+                    <div className="text-[12px]">Produsen Data</div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
           </div>
         </div>
       </section>
