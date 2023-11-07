@@ -1,11 +1,11 @@
-import Image from "next/image"
-import { dokumen } from "../img"
-import DirectStatus from "../inc/DirectStatus"
-import Category from "../inc/Category"
-import CardDocument from "../inc/CardDocument"
+import CardDocument from '@/app/inc/CardDocument'
+import DirectStatus from '@/app/inc/DirectStatus'
+import React from 'react'
+
 
 const page = () => {
-    const namePage = "Dokumen"
+    const tahun = "2019"
+    const namePage = `Info grafis ${tahun}`
   return (
     <>
         <section className="mt-[70px] py-[30px] ">
@@ -16,13 +16,13 @@ const page = () => {
         <section className="py-[30px]">
             <div className="max-w-5xl mx-auto">
                 <div className="text-[36px]">
-                    Semua Dokumen
+                    Data Infografis Tahun {tahun}
                 </div>
                 <h2 className="">
-                    Semua Dokumen Publikasi Dinas Komunikasi dan Informatika Kota Batam.
+                    Publikasi Infografis Dinas Komunikasi dan Informatika Kota Batam pada Tahun {tahun}.
                 </h2>
                 <div className="mt-4">
-                    19 data 
+                    26 posts 
                 </div>
             </div>
         </section>
