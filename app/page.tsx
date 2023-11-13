@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { badge, bannerWeb, logoKotaBatam, logoSatuData, logoSatuDataIndonesia } from "./img";
+import { badge, bannerWeb, logoKabupatenPelalawan, logoKominfo, logoKotaBatam, logoSatuData, logoSatuDataIndonesia } from "./img";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -72,10 +72,10 @@ export default function Home() {
             </div>
           </div>
           <div className="grid grid-cols-5 gap-x-[150px] mt-16">
-            <div className="col-span-2 space-y-4">
+            <div className="col-span-2 space-y-6">
               <Image
-                src={logoSatuData}
-                alt="logo-satu-data.png"
+                src={logoKominfo}
+                alt="logo-kominfo-pelalawan.png"
                 className="w-full"
               />
               <Image
@@ -400,7 +400,7 @@ export default function Home() {
             >
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
-                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <Image src={logoKabupatenPelalawan} alt="logo-kabupaten-pelalawan.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
                   <div>
                     <div className="font-bold">Satuan Polisi Pamong Praja</div>
                     <div className="text-[12px]">Produsen Data</div>
