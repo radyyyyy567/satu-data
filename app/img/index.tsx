@@ -6,5 +6,6 @@ import badge from "./badge_647.png";
 import logoSatuDataIndonesia from "./logo-satu-data-indonesia.png";
 import dokumen from "./dokumen-1.png";
 import logoKominfo from "./logo-kominfo.png";
+import fotoKadisKominfo from "./foto-kadis-kominfo.jpg"
 
-export { logoKotaBatam, logoSatuData, bannerWeb, logoSatuDataIndonesia, badge, dokumen, logoKabupatenPelalawan, logoKominfo};
+export { logoKotaBatam, logoSatuData, bannerWeb, logoSatuDataIndonesia, badge, dokumen, logoKabupatenPelalawan, logoKominfo, fotoKadisKominfo};

@@ -32,7 +32,7 @@ const Footer = () => {
                   <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     data.go.id
                   </a>
@@ -41,7 +41,7 @@ const Footer = () => {
                 <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     kabpelalawan.bps.go.id
                   </a>
@@ -50,7 +50,7 @@ const Footer = () => {
                 <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     siependa.pelalawan.go.id
                   </a>
@@ -59,7 +59,7 @@ const Footer = () => {
                 <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     pddikti.kemdikbud.go.id
                   </a>
@@ -75,7 +75,7 @@ const Footer = () => {
                   <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     dapo.kemdikbud.go.id
                   </a>
@@ -84,7 +84,7 @@ const Footer = () => {
                   <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     emispendis.kemenag.go.id
                   </a>
@@ -93,7 +93,7 @@ const Footer = () => {
                   <ChevronRightIcon className="w-3 h-3"/>
                   <a
                     href="#"
-                    className="duration-300 transition hover:text-blue-500 "
+                    className="duration-300 transition hover:text-red-500 "
                   >
                     satudata.kemnaker.go.id
                   </a>
@@ -103,7 +103,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className="py-[30px] bg-blue-500 bg-opacity-5">
+      <section className="py-[30px] bg-red-500 bg-opacity-5">
         <div className="max-w-5xl mx-auto font-light text-[12px]">
           © Hak Cipta Satu Data{" "}
           <span className="font-bold">Kabupaten Pelalawan</span>.

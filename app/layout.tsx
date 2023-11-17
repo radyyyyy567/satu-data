@@ -7,6 +7,7 @@ import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Footer from "./inc/Footer";
 import Navbar from "./inc/Navbar";
 import { usePathname } from "next/navigation";
+import { LayoutAlt } from "./inc/LayoutAlt";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+          <LayoutAlt >
+            {children}
+          </LayoutAlt>
       </body>
     </html>
   );

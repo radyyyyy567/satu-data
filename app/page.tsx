@@ -1,16 +1,25 @@
 "use client";
 import Image from "next/image";
-import { badge, bannerWeb, logoKabupatenPelalawan, logoKominfo, logoKotaBatam, logoSatuData, logoSatuDataIndonesia } from "./img";
+import {
+  bannerWeb,
+  fotoKadisKominfo,
+  logoKabupatenPelalawan,
+  logoKominfo,
+  logoKotaBatam,
+  logoSatuDataIndonesia,
+} from "./img";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
+import CardCategory from "./inc/CardCategory";
 
 export default function Home() {
   return (
     <>
-      <section className="mt-[70px] h-[60vh] relative">
+      <section className="mt-[70px] h-[400px] relative">
         <div className="h-full w-full">
           <Image
             src={bannerWeb}
@@ -22,7 +31,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto flex flex-col justify-center h-full">
             <div className="text-[48px] text-white text-center w-full font-bold flex leading-[1]">
               <p>Selamat Datang di&nbsp;</p>
-              <p className="uppercase border-b-[4px] border-blue-500">
+              <p className="uppercase border-b-[4px] border-red-500">
                 Satu Data Pelalawan
               </p>
             </div>
@@ -36,7 +45,7 @@ export default function Home() {
                 className="w-full rounded-l-[5px] focus:outline-none p-4"
                 placeholder="Cari data..."
               />
-              <button className="bg-blue-500 flex items-center text-white p-4 space-x-2 rounded-r-[5px]">
+              <button className="bg-red-500 flex items-center text-white p-4 space-x-2 rounded-r-[5px]">
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -63,11 +72,37 @@ export default function Home() {
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center space=-y-2 text-[#444]">
             <div className="text-[32px] text-center font-semibold">
+              Sekapur Sirih
+            </div>
+            <div className="flex items-center mt-6">
+              <div className="bg-gray-400 h-[1px] w-[40px]"></div>
+              <div className="bg-red-500 h-[3px] w-[40px]"></div>
+              <div className="bg-gray-400 h-[1px] w-[40px]"></div>
+            </div>
+          </div>
+          <div className="mt-16 grid grid-cols-2 gap-x-6 content-center">
+            <div className="h-full py-6">
+              <span className="font-bold ">Assalamualaikum Wr.Wb.</span>
+              <p className="my-12">
+                Puji syukur senantiasa kita panjatkan kehadirat Allah SWT, yang telah mencurahkan rahmat dan hidayahnya kepada kita semua sehingga kita dapat melakukan aktivitas kita sehari-hari. Shalawat beserta salam juga tidak lupa kita kirimkan kepada junjungan alam Nabi Besar Muhammad SAW yang telah berjasa membimbing umat manusia menuju alam penuh ilmu pengetahuan. Dalam kesempatan ini kami selaku Kepala Dinas ingin menyampaikan kepada seluruh pembaca/ pengunjung web ini, bahwa web ini merupakan sarana informasi kepada seluruh kalangan yang ingin mencari informasi tentang Dinas Komunikasi dan Informatika Kabupaten Pelalawan. Semoga kami dapat terus membangun dan mempersembahkan karya-karya terbaik. Kepada para pembaca yang budiman, dengan tangan terbuka kami akan menampung segala masukan dan kritikan atas keberadaan web ini dengan terlebih dahulu kami ucapkan terima kasih.
+              </p>
+              <span className="font-bold">Oleh: RINTO RINALDI, S.T., M.Kom</span>
+            </div>
+            <div className="rounded-md overflow-hidden">
+              <Image src={fotoKadisKominfo} alt="foto-kadis-kominfo.jpg" className="object-cover h-full object-center"/>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-[60px]">
+        <div className="mx-auto max-w-5xl">
+          <div className="flex flex-col items-center space=-y-2 text-[#444]">
+            <div className="text-[32px] text-center font-semibold">
               Satu Data Kabupaten Pelalawan
             </div>
             <div className="flex items-center mt-6">
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
-              <div className="bg-blue-500 h-[3px] w-[40px]"></div>
+              <div className="bg-red-500 h-[3px] w-[40px]"></div>
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
             </div>
           </div>
@@ -83,11 +118,10 @@ export default function Home() {
                 alt="logo-satu-data.png"
                 className="w-full"
               />
-              <Image src={badge} alt="logo-satu-data.png" className="w-full" />
             </div>
             <div className="col-span-3">
               <div>
-                <span className="font-semibold text-blue-500">
+                <span className="font-semibold text-red-500">
                   Satu Data Kabupaten Pelalawan{" "}
                 </span>
                 adalah portal milik Pemerintah Kota Batam yang ditujukan untuk
@@ -105,7 +139,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       strokeWidth={2}
                       stroke="currentColor"
-                      className="w-6 h-6 text-blue-500"
+                      className="w-6 h-6 text-red-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -122,7 +156,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       strokeWidth={2}
                       stroke="currentColor"
-                      className="w-6 h-6 text-blue-500"
+                      className="w-6 h-6 text-red-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -141,7 +175,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       strokeWidth={2}
                       stroke="currentColor"
-                      className="w-6 h-6 text-blue-500"
+                      className="w-6 h-6 text-red-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -160,7 +194,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       strokeWidth={2}
                       stroke="currentColor"
-                      className="w-6 h-6 text-blue-500"
+                      className="w-6 h-6 text-red-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -184,105 +218,22 @@ export default function Home() {
             </div>
             <div className="flex items-center">
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
-              <div className="bg-blue-500 h-[3px] w-[40px]"></div>
+              <div className="bg-red-500 h-[3px] w-[40px]"></div>
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
             </div>
           </div>
           <div className="text-center mt-6">
             Pilih data berdasarkan kategori urusan atau bidang
           </div>
-          <div className="-mx-[20px]">
-            <Swiper
-              spaceBetween={10}
-              slidesPerView={3}
-              loop={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
-              pagination={{ type: "bullets" }}
-              modules={[Navigation, Pagination, Autoplay]}
-              className="h-[300px]"
-            >
-              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
-                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-8 h-8 text-blue-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                    />
-                  </svg>
-                  <div className="font-bold">Pendidikan</div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
-                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-8 h-8 text-blue-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                    />
-                  </svg>
-                  <div className="font-bold">Kesehatan</div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
-                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-8 h-8 text-blue-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                    />
-                  </svg>
-                  <div className="font-bold">Pendidikan</div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
-                <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-8 h-8 text-blue-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                    />
-                  </svg>
-                  <div className="font-bold">Pendidikan</div>
-                </div>
-              </SwiperSlide>
-            </Swiper>
+          <div className="grid grid-cols-5 grid-row-2 gap-3 mt-4">
+            <CardCategory />
+            <CardCategory />
+            <CardCategory />
+            <CardCategory />
+            <CardCategory />
+            <CardCategory />
+            <CardCategory />
+            <CardCategory />
           </div>
         </div>
       </section>
@@ -294,7 +245,7 @@ export default function Home() {
             </div>
             <div className="flex items-center">
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
-              <div className="bg-blue-500 h-[3px] w-[40px]"></div>
+              <div className="bg-red-500 h-[3px] w-[40px]"></div>
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
             </div>
           </div>
@@ -304,7 +255,7 @@ export default function Home() {
 
           <div className="grid grid-cols-3 mt-12">
             <div className="flex-col items-center flex text-center space-y-2">
-              <div className="rounded-full bg-blue-500 p-4">
+              <div className="rounded-full bg-red-500 p-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -324,7 +275,7 @@ export default function Home() {
               <div>Data Urusan</div>
             </div>
             <div className="flex-col items-center flex text-center space-y-2">
-              <div className="rounded-full bg-blue-500 p-4">
+              <div className="rounded-full bg-red-500 p-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -346,7 +297,7 @@ export default function Home() {
               <div>Total Data</div>
             </div>
             <div className="flex-col items-center flex text-center space-y-2">
-              <div className="rounded-full bg-blue-500 p-4">
+              <div className="rounded-full bg-red-500 p-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -368,7 +319,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-blue-500 bg-opacity-5 py-[60px]">
+      <section className="bg-red-500 bg-opacity-5 py-[60px]">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <div className="text-[32px] text-center font-semibold">
@@ -376,7 +327,7 @@ export default function Home() {
             </div>
             <div className="flex items-center">
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
-              <div className="bg-blue-500 h-[3px] w-[40px]"></div>
+              <div className="bg-red-500 h-[3px] w-[40px]"></div>
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
             </div>
           </div>
@@ -400,7 +351,11 @@ export default function Home() {
             >
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
-                  <Image src={logoKabupatenPelalawan} alt="logo-kabupaten-pelalawan.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <Image
+                    src={logoKabupatenPelalawan}
+                    alt="logo-kabupaten-pelalawan.jpg"
+                    className="w-[80px] h-[80px] object-cover object-center rounded-full"
+                  />
                   <div>
                     <div className="font-bold">Satuan Polisi Pamong Praja</div>
                     <div className="text-[12px]">Produsen Data</div>
@@ -409,7 +364,11 @@ export default function Home() {
               </SwiperSlide>
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
-                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <Image
+                    src={logoKotaBatam}
+                    alt="logo-kota-batam.jpg"
+                    className="w-[80px] h-[80px] object-cover object-center rounded-full"
+                  />
                   <div>
                     <div className="font-bold">Satuan Polisi Pamong Praja</div>
                     <div className="text-[12px]">Produsen Data</div>
@@ -418,7 +377,11 @@ export default function Home() {
               </SwiperSlide>
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
-                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <Image
+                    src={logoKotaBatam}
+                    alt="logo-kota-batam.jpg"
+                    className="w-[80px] h-[80px] object-cover object-center rounded-full"
+                  />
                   <div>
                     <div className="font-bold">Satuan Polisi Pamong Praja</div>
                     <div className="text-[12px]">Produsen Data</div>
@@ -427,7 +390,11 @@ export default function Home() {
               </SwiperSlide>
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
-                  <Image src={logoKotaBatam} alt="logo-kota-batam.jpg" className="w-[80px] h-[80px] object-cover object-center rounded-full"/>
+                  <Image
+                    src={logoKotaBatam}
+                    alt="logo-kota-batam.jpg"
+                    className="w-[80px] h-[80px] object-cover object-center rounded-full"
+                  />
                   <div>
                     <div className="font-bold">Satuan Polisi Pamong Praja</div>
                     <div className="text-[12px]">Produsen Data</div>
