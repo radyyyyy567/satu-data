@@ -1,6 +1,7 @@
 import DirectStatus from "../inc/DirectStatus";
 
 const page = () => {
+  const value = "";
   const namePage = "Geospasial";
   return (
     <>
@@ -25,7 +26,7 @@ const page = () => {
             <div>Data</div>
             <div>
               <select className="w-full border p-2 focus:outline-blue-100 rounded-[5px]">
-                <option value="" disabled selected>
+                <option value={value} disabled selected>
                   Pilih Periode
                 </option>
                 <option value="0">1</option>

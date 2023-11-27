@@ -1,19 +1,47 @@
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import {
+  ChevronDownIcon,
+  Bars3Icon,
+  ChevronRightIcon,
+  MagnifyingGlassIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 import { logoKominfo, logoSatuDataIndonesia } from "../img/index";
 import Image from "next/image";
-
+import { useState } from "react";
+import DropDownMenu from "./DropDownMenu";
 
 const Navbar = () => {
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const menuDataItems = ["Geospasial", "Statistik Sektorat", "Standar Data"];
+  const menuDataLinks = ["/geospasial", "/data", "/standar-data"];
+  const menuPublikasiItems = ["Dokumen", "Info Grafis"];
+  const subMenuPublikasiItems = [[],["2019", "2020", "2021"]];
+  const menuPublikasiLinks = ["/dokumen", ""];
+  const subMenuuPublikasiLinks = [[],["/infografi/tahun/2019", "/infografi/tahun/2020", "/infografi/tahun/2021"]];
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
   return (
     <>
-      <section className="bg-white h-[70px] w-full fixed top-0 shadow z-40">
-        <nav className="max-w-5xl mx-auto h-full flex items-center justify-between">
+      <section className=" bg-white h-[70px] w-full fixed top-0 shadow z-40">
+        <nav className="flex lg:max-w-5xl max-w-[340px] mx-auto h-full items-center justify-between">
           <div className="flex items-center space-x-3">
-            <Image src={logoKominfo} alt="logo-satu-data.png" height={40} />
+            <Image
+              loading="lazy"
+              src={logoSatuDataIndonesia}
+              alt="logo-satu-data.png"
+              height={40}
+            />
             <div className="bg-red-300 w-[1px] h-[38px]"></div>
-            <Image src={logoSatuDataIndonesia} alt="logo-satu-data-indonesia.png" height={40} />
+            <Image
+              loading="lazy"
+              src={logoKominfo}
+              alt="logo-satu-data-indonesia.png"
+              className="lg:h-[40px] h-[30px] w-auto"
+            />
           </div>
-          <div className="flex items-center space-x-4 text-[16px]">
+          <div className="lg:flex hidden items-center space-x-4 text-[16px]">
             <div>
               <ul className="space-x-4 flex items-center">
                 <li>
@@ -134,8 +162,78 @@ const Navbar = () => {
                 Masuk
               </a>
             </div>
+            <div>
+              <div className="group/search text-red-500 cursor-pointer relative">
+                <MagnifyingGlassIcon className="h-6 w-6" />
+                <div className="group-hover/search:opacity-100 group-hover/search:visible invisible opacity-0 absolute pt-[23px] -left-[200px] transform translate-y-4 group-hover/search:translate-y-0 transition duration-300">
+                  <div className="bg-white shadow p-4 text black">
+                    <input
+                      type="text"
+                      className="focus:outline-none py-2 px-4 border border-gray-700 rounded-[5px] focus:border-red-500"
+                      placeholder="Cari disini..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="lg:hidden rounded-[5px] border">
+            <button className="p-2 active:bg-gray-200 transition duration-100" onClick={toggleMobileMenu}>
+              <Bars3Icon className="h-6 w-6" />
+            </button>
           </div>
         </nav>
+        <nav
+        className={`lg:hidden w-full fixed z-50 top-0 flex transform transition-all duration-300 overflow-scroll pr-[40px] ${
+          showMobileMenu ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+          <div className="w-full bg-white shadow h-screen overflow-scroll p-4 transfrom transition-all duration-200" >
+            <div className="flex justify-between items-center">
+              <div className="text-xl font-semibold pl-2">
+                Menu
+              </div>
+              <button onClick={toggleMobileMenu}>
+                <XMarkIcon className="h-6 w-6 text-black" />
+              </button>
+            </div>
+            <div className="my-[10px] h-[1px] w-full bg-red-500">
+
+            </div>
+            <div className="mt-8">
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="/"
+                    className="block font-semibold p-2 rounded-md hover:bg-gray-200 w-full hover:text-red-500 transition duration-300"
+                  >
+                    Beranda
+                  </a>
+                </li>
+                <DropDownMenu title={"Data"} items={menuDataItems} links={menuDataLinks}/>
+                <DropDownMenu title={"Publikasi"} items={menuPublikasiItems} links={menuPublikasiLinks} subItems={subMenuPublikasiItems} subLinks={subMenuuPublikasiLinks}/>
+                <li>
+                  <a
+                    href="/tentang"
+                    className="block font-semibold p-2 rounded-md hover:bg-gray-200 w-full hover:text-red-500 transition duration-300"
+                  >
+                    Tentang Kami
+                  </a>
+                </li>
+                <li>
+                  <div className="relative flex items-center justify-between">
+                    <input type="text" className="p-2 w-full bg-opacity-0 border-b-2 transition duration-200 border-gray-300 focus:border-red-500 text-black placeholder-gray-800 focus:outline-none" placeholder="Cari Disini..."/>
+                    <MagnifyingGlassIcon className="absolute right-2 w-6 h-6"/>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+        </nav>
+        <div className={`bg-gray-900 fixed top-0 transition-all w-full h-screen lg:hidden duration-300 z-40 ${
+          showMobileMenu ? 'visible opacity-50' : 'invisible opacity-0'
+        }`}></div>
       </section>
     </>
   );

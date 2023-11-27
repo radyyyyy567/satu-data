@@ -19,7 +19,7 @@ const page = () => {
                     Semua Dokumen
                 </div>
                 <h2 className="">
-                    Semua Dokumen Publikasi Dinas Komunikasi dan Informatika Kota Batam.
+                    Semua Dokumen Publikasi Dinas Komunikasi dan Informatika Kabupaten Pelalawan.
                 </h2>
                 <div className="mt-4">
                     19 data 

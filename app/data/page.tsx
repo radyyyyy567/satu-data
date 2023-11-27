@@ -35,7 +35,7 @@ const page = () => {
               <div>
                 <h1 className="text-[36px]">Semua Data</h1>
                 <h2 className="">
-                  Semua data yang terdaftar pada Satu Data Kota Batam.
+                  Semua data yang terdaftar pada Satu Data Kabupaten Pelalawan.
                 </h2>
               </div>
               <div className="border rounded-[5px] mt-8">

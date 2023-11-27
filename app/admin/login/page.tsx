@@ -1,4 +1,4 @@
-import { logoKominfo, logoSatuDataIndonesia } from "@/app/img/index";
+import { logoKominfo, logoPemkabPelalawan } from "@/app/img/index";
 import Image from "next/image";
 
 const page = () => {
@@ -7,10 +7,10 @@ const page = () => {
       <section className="h-screen w-full fixed top-0 left-0 flex items-center justify-center bg-red-100">
         <div className="bg-white rounded-xl p-10 shadow divide-y-4 space-y-10 divide-red-400">
           <div className="flex space-x-3 justify-center">
-            <Image src={logoKominfo} alt="logo-satu-data.png" height={40} />
+            <Image loading="lazy" src={logoPemkabPelalawan} alt="logo-satu-data.png" height={40} />
             <div className="bg-red-300 w-[1px] h-[38px]"></div>
-            <Image
-              src={logoSatuDataIndonesia}
+            <Image loading="lazy"
+              src={logoKominfo}
               alt="logo-satu-data-indonesia.png"
               height={40}
             />
@@ -41,9 +41,9 @@ const page = () => {
                 Lupa Password?
               </a>
             </div>
-            <button className="w-full rounded-[5px] active:bg-red-700 bg-red-500 px-4 py-3 text-white font-semibold text-center">
+            <a href="/admin/dashboard" className=" block w-full rounded-[5px] active:bg-red-700 bg-red-500 px-4 py-3 text-white font-semibold text-center">
               Masuk
-            </button>
+            </a>
           </div>
         </div>
       </section>

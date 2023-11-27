@@ -19,7 +19,7 @@ const page = () => {
                     Data Infografis Tahun {tahun}
                 </div>
                 <h2 className="">
-                    Publikasi Infografis Dinas Komunikasi dan Informatika Kota Batam pada Tahun {tahun}.
+                    Publikasi Infografis Dinas Komunikasi dan Informatika Kabupaten Pelalawan pada Tahun {tahun}.
                 </h2>
                 <div className="mt-4">
                     26 posts 

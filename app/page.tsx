@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import {
-  bannerWeb,
+  bannerWeb1,
+  bannerWeb2,
+  bannerWeb3,
+  bannerWeb4,
   fotoKadisKominfo,
   logoKabupatenPelalawan,
-  logoKominfo,
-  logoKotaBatam,
-  logoSatuDataIndonesia,
 } from "./img";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,61 +15,63 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 import CardCategory from "./inc/CardCategory";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   return (
     <>
-      <section className="mt-[70px] h-[400px] relative">
+      <section className="">
         <div className="h-full w-full">
-          <Image
-            src={bannerWeb}
-            alt="banner-web.jpg"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40">
-          <div className="max-w-5xl mx-auto flex flex-col justify-center h-full">
-            <div className="text-[48px] text-white text-center w-full font-bold flex leading-[1]">
-              <p>Selamat Datang di&nbsp;</p>
-              <p className="uppercase border-b-[4px] border-red-500">
-                Satu Data Pelalawan
-              </p>
-            </div>
-            <div className="text-left text-[24px] text-white mt-2">
-              Portal Terbuka Pemerintah
-              <br />
-              Kabupaten Pelalawan
-            </div>
-            <div className="h-[50px] w-10/12 flex mx-auto mt-8">
-              <input
-                className="w-full rounded-l-[5px] focus:outline-none p-4"
-                placeholder="Cari data..."
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+            modules={[Navigation, Autoplay]}
+            className="h-full w-full"
+          >
+            <SwiperSlide className="w-full pt-[70px] h-screen">
+              <Image
+                loading="lazy"
+                src={bannerWeb1}
+                alt="logo-kabupaten-pelalawan.jpg"
+                className="w-full h-full object-cover"
               />
-              <button className="bg-red-500 flex items-center text-white p-4 space-x-2 rounded-r-[5px]">
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={4}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
-                </div>
-                <div>Cari</div>
-              </button>
-            </div>
-          </div>
+            </SwiperSlide>
+            <SwiperSlide className="w-full pt-[70px] h-screen">
+              <Image
+                loading="lazy"
+                src={bannerWeb2}
+                alt="logo-kabupaten-pelalawan.jpg"
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
+            <SwiperSlide className="w-full pt-[70px] h-screen">
+              <Image
+                loading="lazy"
+                src={bannerWeb3}
+                alt="logo-kabupaten-pelalawan.jpg"
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
+            <SwiperSlide className="w-full pt-[70px] h-screen">
+              <Image
+                loading="lazy"
+                src={bannerWeb4}
+                alt="logo-kabupaten-pelalawan.jpg"
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
+          </Swiper>
         </div>
       </section>
       <section className="py-[60px]">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-[340px] lg:max-w-5xl">
           <div className="flex flex-col items-center space=-y-2 text-[#444]">
             <div className="text-[32px] text-center font-semibold">
               Sekapur Sirih
@@ -80,138 +82,66 @@ export default function Home() {
               <div className="bg-gray-400 h-[1px] w-[40px]"></div>
             </div>
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-x-6 content-center">
+          <div className="mt-16 lg:grid grid-cols-2 gap-x-6 content-center">
             <div className="h-full py-6">
               <span className="font-bold ">Assalamualaikum Wr.Wb.</span>
-              <p className="my-12">
-                Puji syukur senantiasa kita panjatkan kehadirat Allah SWT, yang telah mencurahkan rahmat dan hidayahnya kepada kita semua sehingga kita dapat melakukan aktivitas kita sehari-hari. Shalawat beserta salam juga tidak lupa kita kirimkan kepada junjungan alam Nabi Besar Muhammad SAW yang telah berjasa membimbing umat manusia menuju alam penuh ilmu pengetahuan. Dalam kesempatan ini kami selaku Kepala Dinas ingin menyampaikan kepada seluruh pembaca/ pengunjung web ini, bahwa web ini merupakan sarana informasi kepada seluruh kalangan yang ingin mencari informasi tentang Dinas Komunikasi dan Informatika Kabupaten Pelalawan. Semoga kami dapat terus membangun dan mempersembahkan karya-karya terbaik. Kepada para pembaca yang budiman, dengan tangan terbuka kami akan menampung segala masukan dan kritikan atas keberadaan web ini dengan terlebih dahulu kami ucapkan terima kasih.
-              </p>
-              <span className="font-bold">Oleh: RINTO RINALDI, S.T., M.Kom</span>
-            </div>
-            <div className="rounded-md overflow-hidden">
-              <Image src={fotoKadisKominfo} alt="foto-kadis-kominfo.jpg" className="object-cover h-full object-center"/>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="py-[60px]">
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-col items-center space=-y-2 text-[#444]">
-            <div className="text-[32px] text-center font-semibold">
-              Satu Data Kabupaten Pelalawan
-            </div>
-            <div className="flex items-center mt-6">
-              <div className="bg-gray-400 h-[1px] w-[40px]"></div>
-              <div className="bg-red-500 h-[3px] w-[40px]"></div>
-              <div className="bg-gray-400 h-[1px] w-[40px]"></div>
-            </div>
-          </div>
-          <div className="grid grid-cols-5 gap-x-[150px] mt-16">
-            <div className="col-span-2 space-y-6">
-              <Image
-                src={logoKominfo}
-                alt="logo-kominfo-pelalawan.png"
-                className="w-full"
-              />
-              <Image
-                src={logoSatuDataIndonesia}
-                alt="logo-satu-data.png"
-                className="w-full"
-              />
-            </div>
-            <div className="col-span-3">
-              <div>
-                <span className="font-semibold text-red-500">
-                  Satu Data Kabupaten Pelalawan{" "}
-                </span>
-                adalah portal milik Pemerintah Kota Batam yang ditujukan untuk
-                publik dalam mengakses data dan informasi mengenai Kota Batam.
-              </div>
-              <div className="mt-4">
-                Beberapa fitur portal Satu Data Pelalawan.
-              </div>
-              <div className="mt-4">
-                <ul className="space-y-3">
-                  <li className="flex items-center space-x-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-6 h-6 text-red-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>Data Berdasarkan urusan/bidang.</span>
+              <div className="my-12 space-y-[30px]">
+                <p>
+                Dalam kesempatan ini, kami ingin memperkenalkan kepada masyarakat luas portal satudata yang merupakan sarana dari Pemerintah Kabupaten Pelalawan untuk memberikan akses terhadap data dan informasi kepada publik. Berikut adalah beberapa fitur yang kami tawarkan melalui portal Satu Data Pelalawan:
+                </p>
+                <ul className=" space-y-2 ">
+                  <li className="flex items-start space-x-2">
+                    <div className="w-6">
+                      <CheckCircleIcon className="text-red-500 w-6 h-6"/>
+                    </div>
+                    <div>
+                      Data Berdasarkan urusan/bidang.
+                    </div>
                   </li>
-                  <li className="flex items-center space-x-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-6 h-6 text-red-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>
+                  <li className="flex items-start space-x-2">
+                    <div className="w-6">
+                      <CheckCircleIcon className="text-red-500 w-6 h-6"/>
+                    </div>
+                    <div>
                       Tampilan data series Bulanan, Semester dan Tahunan.
-                    </span>
+                    </div>
                   </li>
-                  <li className="flex items-center space-x-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-6 h-6 text-red-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                  <li className="flex items-start space-x-2">
+                  <div className="w-6">
+                      <CheckCircleIcon className="text-red-500 w-6 h-6"/>
+                    </div>
                     <span>
                       Tampilan data dalam format JSON dan tabel excel.
                     </span>
                   </li>
-                  <li className="flex items-center space-x-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-6 h-6 text-red-500"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                  <li className="flex items-start space-x-2">
+                  <div className="w-6">
+                      <CheckCircleIcon className="text-red-500 w-6 h-6"/>
+                    </div>
                     <span>Pencarian data.</span>
                   </li>
                 </ul>
+                <p>
+                Kami mengundang dengan tulus para pengguna portal ini untuk memberikan masukan dan kritik yang membangun guna peningkatan kualitas portal Satu Data Pelalawan. Terima kasih atas perhatian serta dukungan yang diberikan.
+                </p>
               </div>
+              <span className="font-bold">
+                Oleh: RINTO RINALDI, S.T., M.Kom
+              </span>
+            </div>
+            <div className="rounded-md overflow-hidden">
+              <Image
+                loading="lazy"
+                src={fotoKadisKominfo}
+                alt="foto-kadis-kominfo.jpg"
+                className="object-cover h-full object-center"
+              />
             </div>
           </div>
         </div>
       </section>
       <section className="py-[60px]">
-        <div className="max-w-5xl mx-auto">
+        <div className="lg:max-w-5xl max-w-[340px] mx-auto">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <div className="text-[32px] text-center font-semibold">
               Kategori
@@ -225,7 +155,7 @@ export default function Home() {
           <div className="text-center mt-6">
             Pilih data berdasarkan kategori urusan atau bidang
           </div>
-          <div className="grid grid-cols-5 grid-row-2 gap-3 mt-4">
+          <div className="grid lg:grid-cols-5 grid-cols-2 lg:grid-row-2 gap-3 mt-4">
             <CardCategory />
             <CardCategory />
             <CardCategory />
@@ -238,7 +168,7 @@ export default function Home() {
         </div>
       </section>
       <section className="py-[60px]">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto lg:max-w-5xl max-w-[340px]">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <div className="text-[32px] text-center font-semibold">
               Statistik Satu Data Kabupaten Pelalawan
@@ -250,10 +180,10 @@ export default function Home() {
             </div>
           </div>
           <div className="text-center mt-6">
-            Statistik data yang terdaftar pada aplikasi Satu Data Kota Batam
+            Statistik data yang terdaftar pada aplikasi Satu Data Kabupaten Pelalawan
           </div>
 
-          <div className="grid grid-cols-3 mt-12">
+          <div className="lg:grid grid-cols-3 mt-12 lg:space-y-0 space-y-12">
             <div className="flex-col items-center flex text-center space-y-2">
               <div className="rounded-full bg-red-500 p-4">
                 <svg
@@ -319,8 +249,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-red-500 bg-opacity-5 py-[60px]">
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-red-500 bg-opacity-5 py-[60px] ">
+        <div className="lg:max-w-5xl max-w-[340px] mx-auto">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <div className="text-[32px] text-center font-semibold">
               Produsen Data
@@ -334,10 +264,20 @@ export default function Home() {
           <div className="text-center mt-6">
             Pilih data berdasarkan kategori urusan atau bidang
           </div>
-          <div className="-mx-[20px]">
+          <div className="lg:-mx-[20px] -mx-[10px]">
             <Swiper
               spaceBetween={10}
               slidesPerView={3}
+              breakpoints={{
+                360: {
+                  slidesPerView: 1,
+                  
+                },
+                1024: {
+                  slidesPerView: 3,
+                  
+                },
+              }}
               loop={true}
               autoplay={{
                 delay: 2500,
@@ -348,10 +288,12 @@ export default function Home() {
               pagination={{ type: "bullets" }}
               modules={[Navigation, Pagination, Autoplay]}
               className="h-[400px]"
+              
             >
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
                   <Image
+                    loading="lazy"
                     src={logoKabupatenPelalawan}
                     alt="logo-kabupaten-pelalawan.jpg"
                     className="w-[80px] h-[80px] object-cover object-center rounded-full"
@@ -365,8 +307,9 @@ export default function Home() {
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
                   <Image
-                    src={logoKotaBatam}
-                    alt="logo-kota-batam.jpg"
+                    loading="lazy"
+                    src={logoKabupatenPelalawan}
+                    alt="logo-kabupaten-pelalawan.jpg"
                     className="w-[80px] h-[80px] object-cover object-center rounded-full"
                   />
                   <div>
@@ -378,8 +321,9 @@ export default function Home() {
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
                   <Image
-                    src={logoKotaBatam}
-                    alt="logo-kota-batam.jpg"
+                    loading="lazy"
+                    src={logoKabupatenPelalawan}
+                    alt="logo-kabupaten-pelalawan.jpg"
                     className="w-[80px] h-[80px] object-cover object-center rounded-full"
                   />
                   <div>
@@ -391,8 +335,9 @@ export default function Home() {
               <SwiperSlide className="text-center pb-[80px] pt-[30px] px-[10px]">
                 <div className="shadow-xl bg-white h-full flex flex-col items-center justify-center space-y-4">
                   <Image
-                    src={logoKotaBatam}
-                    alt="logo-kota-batam.jpg"
+                    loading="lazy"
+                    src={logoKabupatenPelalawan}
+                    alt="logo-kabupaten-pelalawan.jpg"
                     className="w-[80px] h-[80px] object-cover object-center rounded-full"
                   />
                   <div>
