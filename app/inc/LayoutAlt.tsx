@@ -8,12 +8,12 @@ export const LayoutAlt = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   return (
     <>
-      {pathname.includes("/admin/login") ? (
-        children
-      ) : pathname.includes("/admin/dashboard") ? (
+      {pathname.includes("/admin/dashboard") ? (
         <>
           <LayoutDashboard>{children}</LayoutDashboard>
         </>
+      ) : pathname.includes("/admin/") ? (
+        children
       ) : (
         <>
           <Navbar />
