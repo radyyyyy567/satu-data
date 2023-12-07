@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { ArrowLeftOnRectangleIcon, BellIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftOnRectangleIcon, BellIcon, HomeIcon, DocumentIcon, UserIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { logoKominfo, logoSatuDataIndonesia, userImage } from "../img";
+import Logout from "./Logout";
+
 
 export const LayoutDashboard = ({
   children,
@@ -16,9 +18,9 @@ export const LayoutDashboard = ({
   };
 
   return (
-    <div className="flex overflow-hidden h-screen">
+    <div className="flex h-screen overflow-hidden">
       <section
-        className={`w-[300px] h-full flex flex-col justify-between overflow-hidden bg-gray-200 transition-all duration-300 ease-in-out ${
+        className={`w-[300px] h-full flex flex-col justify-between  bg-gray-200 transition-all duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -54,6 +56,22 @@ export const LayoutDashboard = ({
                             </span>
                           </a> 
                       </li>
+                      <li>
+                          <a href="/admin/dashboard/data" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                            <DocumentIcon className="w-5 h-5"/>
+                            <span>
+                              Data
+                            </span>
+                          </a> 
+                      </li>
+                      <li>
+                          <a href="/admin/dashboard/user" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                            <UserIcon className="w-5 h-5"/>
+                            <span>
+                              Users
+                            </span>
+                          </a> 
+                      </li>
                   </ul>
               </div>
           </div>
@@ -64,12 +82,7 @@ export const LayoutDashboard = ({
                   </div>
                   <ul className="mt-4">
                       <li>
-                          <a href="/admin/dashboard" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full text-white bg-red-500 active:bg-red-800 rounded-lg ">
-                            <ArrowLeftOnRectangleIcon className="w-5 h-5" />
-                            <span>
-                              Logo Out
-                            </span>
-                          </a> 
+                        <Logout />   
                       </li>
                   </ul>
               </div>
@@ -80,7 +93,7 @@ export const LayoutDashboard = ({
         </div>
       </section>
       <section
-        className={`w-full transition-all duration-300 ${
+        className={`w-full h-full relative transition-all overflow-hidden duration-300 ${
           sidebarOpen ? "ml-0" : "-ml-[300px]"
         }`}
       >
@@ -117,7 +130,11 @@ export const LayoutDashboard = ({
             </div>
           </div>
         </nav>
-        {children}
+        <div className="h-full pb-[70px]">
+          <div className="h-full overflow-y-auto border-b-2">
+            {children}
+          </div>
+        </div>
       </section>
     </div>
   );

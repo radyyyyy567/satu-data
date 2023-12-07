@@ -1,16 +1,38 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { User } from "@prisma/client";
 import argon2 from "argon2";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
 
 const prisma = new PrismaClient();
 
+interface User {
+  username: string,
+  email: string,
+  password: string,
+  confPassword: string,
+  role: string,
+}
+
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authOptions)
+    const roleSession = await session?.user.role
+
+    if (!session || roleSession !== "admin") {
+      return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
+    }
     const body: User = await req.json();
-    const { username, email, password, role } = body;
+    const { username, email, password, confPassword, role } = body;
 
-
+    const confPasswordNotMatch = await confPassword != password;
+    if(confPasswordNotMatch) {
+      return NextResponse.json(
+        { user: null, message: "Silahkan cocokkan password dengan Konfirmasi Password!" },
+        { status: 400 }
+      )
+    }
     // check jika email sudah ada
     const existingUserByEmail = await prisma.user.findUnique({
       where: { email: email },
@@ -39,14 +61,39 @@ export async function POST(req: Request) {
         username,
         email,
         password: hashedPassword,
+        verification: false,        
         role
       },
     });
 
-    const { password: newUserPassword, ...rest } = newUser;
+    const { id: newUserId ,password: newUserPassword, ...rest } = newUser;
 
     return NextResponse.json({ user: rest, message: "Registrasi Berhasil!" }, { status: 201 });
   } catch (error) {
     return NextResponse.json({message: "Ada sesuatu yang salah" }, {status: 500})
+  }
+}
+ 
+
+export async function GET(){
+  try {
+    const session = await getServerSession(authOptions)
+    const roleSession = await session?.user.role
+
+    if (!session || roleSession !== "admin") {
+      return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
+    }
+
+    const userData = await prisma.user.findMany({
+      select: {
+        username: true,
+        email: true,
+        role: true
+      }
+    });
+
+    return NextResponse.json({ user: userData, message: "ok" }, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json({ user: null, message: "Gagal mengambil data user" + error.message }, { status: 500 });
   }
 }

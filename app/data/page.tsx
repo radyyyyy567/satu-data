@@ -1,7 +1,7 @@
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/solid";
 import DirectStatus from "../inc/DirectStatus";
 import "../globals.css";
-import DataTable from "../inc/DataTable";
+import ListDataPost from "../components/ListDataPost";
 
 
 const page = () => {
@@ -47,7 +47,7 @@ const page = () => {
                 </button>
               </div>
               <div className="mt-4">
-                <DataTable />
+                <ListDataPost />
               </div>
             </div>
           </div>   

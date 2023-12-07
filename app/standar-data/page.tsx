@@ -1,7 +1,8 @@
 import React from "react";
 import DirectStatus from "../inc/DirectStatus";
 import { DocumentArrowDownIcon } from "@heroicons/react/24/solid";
-import DataTable from "../inc/DataTable";
+import ListDataPost from "../components/ListDataPost";
+
 
 const page = () => {
   const namePage = "Standar Data";
@@ -29,7 +30,7 @@ const page = () => {
             </div>
           </div>
           <div className="mt-4">
-            <DataTable />
+            <ListDataPost />
           </div>
         </div>
       </section>

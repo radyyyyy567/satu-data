@@ -11,12 +11,23 @@ datasource db {
 }
 
 model User {
-  id            Int @id @default(autoincrement())
+  id            String   @id @default(uuid())
   username      String   @unique
   email         String   @unique
   password      String
   role          String
+  verification  Boolean   
+  datapost      DataPost[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
 
+model DataPost {
+  id            String @id @default(uuid())
+  title         String 
+  filename      String 
+  uploader      User @relation(fields: [uploaderId], references: [id])
+  uploaderId    String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}

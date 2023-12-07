@@ -156,7 +156,7 @@ const Navbar = () => {
             </div>
             <div>
               <a
-                href="/admin/login"
+                href="/admin/dashboard"
                 className="py-3 px-7 border border-red-500 rounded-[5px] text-red-500 font-semibold"
               >
                 Masuk
