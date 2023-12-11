@@ -30,7 +30,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ error: "Only Excel files are allowed" }, { status: 400 });
   }
 
-  const destinationDirPath = path.join(process.cwd(), "public/upload");
+  const destinationDirPath = path.join(process.cwd(), "/tmp");
 
   const fileBuffer = await file.arrayBuffer();
   const fileNameHash = crypto.createHash('md5').update(Buffer.from(fileBuffer)).digest('hex');

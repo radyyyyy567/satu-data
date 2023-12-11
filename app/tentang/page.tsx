@@ -6,12 +6,12 @@ const page = () => {
   const namePage = "Tentang Kami";
   return (
     <>
-      <section>
+      <section className="">
         <div className="max-w-5xl mx-auto mt-[70px] py-[30px]">
           <DirectStatus namePage={namePage} />
         </div>
-      </section>
-      <section>
+      </section>https://github.com/radyyyyy567/satu-data?search=1
+      <section className="bg-gray-100 py-[30px]">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center text-[#444] space-y-6">
             <h1 className="text-[32px] text-center font-semibold">
@@ -30,10 +30,10 @@ const page = () => {
                 alt="logo-kabupaten-pelalawan.png"
               />
             </div>
-            <div className="space-y-4 col-span-2">
-              <p>Bahwa perbaikan tata kelola data oleh Pemerintah Daerah perlu dilakukan dalam mendukung penyelenggaraan Satu Data Indonesia sesuai amanat <a href="/" className="text-blue-500">Peraturan Presiden Nomor 39 Tahun 2019 tentang</a>  Satu Data Indonesia.
+            <div className="space-y-4 col-span-2 text-justify">
+              <p>Bahwa perbaikan tata kelola data oleh Pemerintah Daerah perlu dilakukan dalam mendukung penyelenggaraan Satu Data Indonesia sesuai amanat Peraturan Presiden Nomor 39 Tahun 2019 tentang Satu Data Indonesia.
               </p>
-              <p>Satu Data Kabupaten Pelalawan merupakan bentuk kebijakan tata kelola data di Pemerintah Kabupaten Pelalawan yang bertujuan untuk menciptakan data berkualitas, mudah diakses, terintegrasi dan dapat dibagipakaikan antar Instansi di Kabupaten Pelalawan, Kepulauan Riau. Kebijakan ini tertuang dalam Peraturan WaliKabupaten Pelalawan Nomor 47 Tahun 2019 tentang Penyelenggaraan Satu Data Indonesia Tingkat Kabupaten Pelalawan. Melalui Satu Data Kabupaten Pelalawan, seluruh data Kecamatan per-semesternya dapat bermuara di Portal Satu Data Kabupaten Pelalawan (<a href="/" className="text-blue-500">https://satudata.kabpelalawan.go.id</a>). Selanjutnya, terintegrasi ke tingkat Nasional dengan Satu Data Indonesia  (<a href="https://data.go.id/" className="text-blue-500">https://data.go.id/</a>).
+              <p>Satu Data Kabupaten Pelalawan merupakan bentuk kebijakan tata kelola data di Pemerintah Kabupaten Pelalawan yang bertujuan untuk menciptakan data berkualitas, mudah diakses, terintegrasi dan dapat dibagipakaikan antar Instansi di Kabupaten Pelalawan, Kepulauan Riau. Kebijakan ini tertuang dalam Peraturan WaliKabupaten Pelalawan Nomor 47 Tahun 2019 tentang Penyelenggaraan Satu Data Indonesia Tingkat Kabupaten Pelalawan. Melalui Satu Data Kabupaten Pelalawan, seluruh data Kecamatan per-semesternya dapat bermuara di Portal Satu Data Kabupaten Pelalawan https://satudata.kabpelalawan.go.id Selanjutnya, terintegrasi ke tingkat Nasional dengan Satu Data Indonesia https://data.go.id/.
               </p>
               <p>Portal Satu Data Kabupaten Pelalawan merupakan portal resmi data terbuka Kabupaten Pelalawan yang dikelola oleh Sekretariat Forum Satu Data Kabupaten Pelalawan dan Dinas Komunikasi dan Informatika Kabupaten Pelalawan. Melalui Portal Satu Data Kabupaten Pelalawan, kami berupaya penuh untuk memperbaiki tata kelola data demi terwujudnya transparansi dan akuntabilitas pemerintah, serta mendukung pembangunan nasional.
               </p>

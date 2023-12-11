@@ -20,16 +20,20 @@ export const authOptions: NextAuthOptions = {
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "Email", placeholder: "johnDoe" },
+        username: {
+          label: "username",
+          type: "text",
+          placeholder: "Isi email anda disini",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.username || !credentials?.password) {
           return null;
         }
 
         const existingUser = await prisma.user.findUnique({
-          where: { email: credentials?.email },
+          where: { username: credentials?.username },
         });
         if (!existingUser) {
           return null;
@@ -44,11 +48,16 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        const verificationUser = existingUser.verification;
+
+        if (!verificationUser) {
+          return null;
+        }
+
         return {
           id: `${existingUser.id}`,
           username: existingUser.username,
-          email: existingUser.email,
-          role: existingUser.role
+          role: existingUser.role,
         };
       },
     }),
@@ -60,7 +69,7 @@ export const authOptions: NextAuthOptions = {
           ...token,
           id: user.id,
           username: user.username,
-          role: user.role
+          role: user.role,
         };
       }
       return token;
@@ -74,7 +83,7 @@ export const authOptions: NextAuthOptions = {
           username: token.username as string,
           role: token.role as string,
         },
-      }
+      };
     },
   },
 };

@@ -9,7 +9,7 @@ interface FileDownloadComponentProps {
 const FileDownloadComponent: React.FC<FileDownloadComponentProps> = ({ fileName }) => {
   const handleDownload = () => {
     // Create a link to the file using the public folder path
-    const fileURL = `/upload/${fileName}`;
+    const fileURL = `http://localhost:3000/upload/${fileName}`;
     const link = document.createElement('a');
     link.href = fileURL;
     link.download = fileName;
@@ -20,7 +20,7 @@ const FileDownloadComponent: React.FC<FileDownloadComponentProps> = ({ fileName 
 
   return (
     <button onClick={handleDownload}>
-      Download {fileName}
+      Download
     </button>
   );
 };

@@ -26,13 +26,13 @@ export async function POST(req: Request) {
     const body: User = await req.json();
     const { username, email, password, confPassword, role } = body;
 
-    const registAdmin = await body.role == "admin";
-    if(registAdmin){
-      return NextResponse.json(
-        { user: null, message: "Anda tidak bisa menambah admin lagi" },
-        { status: 400 }
-      )
-    }
+    // const registAdmin = await body.role == "admin";
+    // if(registAdmin){
+    //   return NextResponse.json(
+    //     { user: null, message: "Anda tidak bisa menambah admin lagi" },
+    //     { status: 400 }
+    //   )
+    // }
 
     const confPasswordNotMatch = await confPassword != password;
     if(confPasswordNotMatch) {
@@ -41,17 +41,7 @@ export async function POST(req: Request) {
         { status: 400 }
       )
     }
-    // check jika email sudah ada
-    const existingUserByEmail = await prisma.user.findUnique({
-      where: { email: email },
-    });
-    if (existingUserByEmail) {
-      return NextResponse.json(
-        { user: null, message: "User dengan email ini sudah ada!" },
-        { status: 409 }
-      );
-    }
-
+    
     // check jika username sudah ada
     const existingUserByUsername = await prisma.user.findUnique({
       where: { username: username },
@@ -67,9 +57,7 @@ export async function POST(req: Request) {
     const newUser = await prisma.user.create({
       data: {
         username,
-        email,
         password: hashedPassword,
-        verification: false,        
         role
       },
     });
@@ -95,7 +83,7 @@ export async function GET(){
     const userData = await prisma.user.findMany({
       select: {
         username: true,
-        email: true,
+        verification: true,
         role: true
       }
     });

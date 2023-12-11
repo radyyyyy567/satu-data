@@ -27,13 +27,16 @@ export async function DELETE(
       return NextResponse.json({ message: "Data File tidak ditemukan!" }, { status: 404 });
     }
 
-    const filePath = path.join(process.cwd(), 'public', 'upload', `${datapost.filename}`);
+    const filePath = path.join(process.cwd(), 'src', 'upload', `${datapost.filename}`);
+    
     try {
-      await fs.access(filePath); // Check if file exists
-      await fs.unlink(filePath); // Delete the file
+      await fs.access(filePath); // This line checks if the file exists
     } catch (error) {
-      return NextResponse.json({ message: "Gagal menghapus file" }, { status: 500 });
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+        await fs.unlink(filePath)
+      }
     }
+
 
     await prisma.dataPost.delete({
       where: {

@@ -12,14 +12,14 @@ const LoginComponent = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [login, setLogin] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const onSignIn = async () => {
     const signInData = await signIn("credentials", {
-      email: login.email,
+      username: login.username,
       password: login.password,
       redirect: false,
     });
@@ -31,7 +31,7 @@ const LoginComponent = () => {
   };
 
   useEffect(() => {
-    if (login.email.length > 0 && login.password.length > 0) {
+    if (login.username.length > 0 && login.password.length > 0) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
@@ -58,19 +58,19 @@ const LoginComponent = () => {
       <div className="py-4 space-y-4">
         <div className="space-y-1">
           <label htmlFor="email" className="text-gray-500 text-[12px]">
-            Email
+            Username
           </label>
           <input
             id="email"
             type="text"
-            value={login.email}
+            value={login.username}
             onChange={(e) =>
               setLogin({
                 ...login,
-                email: e.target.value,
+                username: e.target.value,
               })
             }
-            placeholder="Masukkan Email disini"
+            placeholder="Masukkan Username disini"
             className="w-full rounded-[5px] focus:outline-red-500 outline-offset-4 border px-4 py-3 text-[14px]"
           />
         </div>

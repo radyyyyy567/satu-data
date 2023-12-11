@@ -12,11 +12,10 @@ datasource db {
 
 model User {
   id            String   @id @default(uuid())
-  username      String   @unique
-  email         String   @unique
+  username      String   @unique  
   password      String
   role          String
-  verification  Boolean   
+  verification  Boolean   @default(true)
   datapost      DataPost[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
