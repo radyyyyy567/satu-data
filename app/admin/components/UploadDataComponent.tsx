@@ -1,10 +1,16 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ListDataPostAdmin from "./ListDataPostAdmin";
 
 const UploadDataComponent: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -20,16 +26,16 @@ const UploadDataComponent: React.FC = () => {
     }
   };
 
+  const resetFileState = (e: ChangeEvent<HTMLInputElement>) => {
+    e.target.value = "";
+  };
+
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log("File:", file); // Log the file state
-    console.log("Title:", title); // Log the title state
-
     if (!file || !title) {
       alert("Please select a file and provide a title.");
       return;
@@ -44,18 +50,37 @@ const UploadDataComponent: React.FC = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const uploadPercentage = Math.floor(
+              (progressEvent.loaded / progressEvent.total) * 100
+            );
+            setProgress(uploadPercentage);
+          }
+        },
       });
-
-      console.log("File uploaded successfully!", response.data);
-      // Add any further handling or feedback here after successful upload
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      // Handle error, show a message, or perform other actions
+      setLoading(true);
+    } catch (error: any) {
+      toast.error("Proses Upload Data Gagal " + error.response.data.message);
+    } finally {
+      setProgress(0);
+      resetFileState;
+      setLoading(false);
+      toast.success("Upload Data Berhasil");
     }
   };
 
+  useEffect(() => {
+    if (title.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [title]);
+
   return (
     <div className="p-4">
+      <ToastContainer />
       <div>
         <div className="font-bold text-2xl">Upload Data</div>
       </div>
@@ -80,9 +105,7 @@ const UploadDataComponent: React.FC = () => {
           >
             Pilih File
           </label>
-          <span className="ml-2">
-            {file?.name}
-          </span>
+          <span className="ml-2">{file?.name}</span>
           <input
             type="file"
             id="file"
@@ -92,14 +115,38 @@ const UploadDataComponent: React.FC = () => {
             required
             hidden
           />
+          
         </div>
         <button
           type="submit"
-          className="ring-2 px-3 py-2 bg-blue-800 text-white rounded-md"
+          className={`block w-full rounded-[5px] ${
+            buttonDisabled ? "bg-gray-500" : "active:bg-red-700 bg-red-500"
+          }  px-4 py-3 text-white font-semibold text-center`}
+          disabled={buttonDisabled}
         >
-          Upload
+          {loading ? "Proses..." : "Upload"}
         </button>
+        { progress > 0 && <div className="flex items-center space-x-2">
+            <div className="relative rounded-full overflow-hidden w-full items-center space-x-2 h-5 border border-green-500">
+              <div
+                className="bg-green-500 h-full transform transition-all duration-300"
+                style={{
+                  width: `${progress}%`
+                }}
+              ></div>
+              <div className="absolute flex items-center h-full justify-center top-0 text-black text-center w-full">
+                  <div className="">
+                    %{progress}
+                  </div>
+              </div>
+            </div>
+          </div>
+          }
       </form>
+      <div className="font-bold text-3xl text-gray-700 mt-8 mb-4">
+        Tabel Data Post
+      </div>
+      <ListDataPostAdmin />
     </div>
   );
 };

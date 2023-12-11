@@ -1,13 +1,16 @@
-"use client";
+  "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const MakeUserComponent: React.FC = () => {
+  
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const [user, setUser] = useState({
     username: "",
@@ -16,7 +19,6 @@ const MakeUserComponent: React.FC = () => {
     confPassword: "",
     role: "",
   });
-  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const resetUserState = () => {
     setUser({
@@ -27,16 +29,15 @@ const MakeUserComponent: React.FC = () => {
       role: "",
     });
   };
-  const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault( )
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
     try {
       setLoading(true);
       const reponse = await axios.post("/api/user", user);
-      console.log("Pendaftaran Berhasil", reponse.data);
-    } catch (error: any) {
-      console.log("Pendaftaran gagal");
-      setErrorMessage("Pendaftaran gagal " + error.response.data.message);
+    } catch (error: any) {    
+      toast.error("Pendaftaran gagal " + error.response.data.message);
     } finally {
+      toast.success("Sukses! User telah terdaftar");
       resetUserState();
       setLoading(false);
     }
@@ -60,7 +61,7 @@ const MakeUserComponent: React.FC = () => {
       <div>
         <div className="font-bold text-2xl">Tambah User</div>
         <div className="text-red-500">
-          {errorMessage}
+          <ToastContainer />          
         </div>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 pt-4">
