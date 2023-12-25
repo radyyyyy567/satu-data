@@ -40,6 +40,6 @@ next-env.d.ts
 
 *.rest
 
-/prisma/migrations/
+
 /public/upload/
 /public/uploads/
