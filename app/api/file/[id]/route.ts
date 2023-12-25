@@ -5,13 +5,14 @@ import { authOptions } from "@/lib/auth";
 import fs from 'fs/promises';
 import path from 'path'; // Import path module
 
+
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions);
-    const roleSession = await session?.user.role;
+    const roleSession = session?.user.role;
 
     if (!session || roleSession !== "admin") {
       return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
@@ -27,7 +28,7 @@ export async function DELETE(
       return NextResponse.json({ message: "Data File tidak ditemukan!" }, { status: 404 });
     }
 
-    const filePath = path.join(process.cwd(), 'src', 'upload', `${datapost.filename}`);
+    const filePath = path.join(process.cwd(), 'public', 'upload', `${datapost.filename}`);
     
     try {
       await fs.access(filePath); // This line checks if the file exists

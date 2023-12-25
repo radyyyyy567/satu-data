@@ -5,9 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ListDataPostAdmin from "./ListDataPostAdmin";
 
+
 const UploadDataComponent: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -33,6 +36,12 @@ const UploadDataComponent: React.FC = () => {
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
+  const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setDescription(e.target.value);
+  };
+  const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategory(e.target.value);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +53,8 @@ const UploadDataComponent: React.FC = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("title", title);
+    formData.append("description", description);
+    formData.append("category", category);
 
     try {
       const response = await axios.post("/api/file", formData, {
@@ -60,13 +71,14 @@ const UploadDataComponent: React.FC = () => {
         },
       });
       setLoading(true);
+      toast.success("Upload Data Berhasil");
     } catch (error: any) {
+      console.log(error.response.data.message)
       toast.error("Proses Upload Data Gagal " + error.response.data.message);
     } finally {
       setProgress(0);
       resetFileState;
       setLoading(false);
-      toast.success("Upload Data Berhasil");
     }
   };
 
@@ -97,6 +109,30 @@ const UploadDataComponent: React.FC = () => {
             className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
           />
         </div>
+        <div>
+          <div className="mb-2">Silahkan Masukkan Deskripsi Data</div>
+          <input
+            type="text"
+            name="description"
+            placeholder="Deskripsi"
+            value={description}
+            onChange={handleDescriptionChange}
+            required
+            className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
+          />
+        </div>
+        <div>
+          <div className="mb-2">Silahkan Masukkan Kategori Data</div>
+          <input
+            type="text"
+            name="category"
+            placeholder="Kategori"
+            value={category}
+            onChange={handleCategoryChange}
+            required
+            className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
+          />
+        </div>
         <div className="space-y-2 spacex-x-2">
           <div>Silahkan pilih file data yang ingin di upload</div>
           <label
@@ -117,15 +153,23 @@ const UploadDataComponent: React.FC = () => {
           />
           
         </div>
+        <div className="flex items-center gap-x-2">
         <button
           type="submit"
           className={`block w-full rounded-[5px] ${
             buttonDisabled ? "bg-gray-500" : "active:bg-red-700 bg-red-500"
           }  px-4 py-3 text-white font-semibold text-center`}
           disabled={buttonDisabled}
-        >
+        > 
           {loading ? "Proses..." : "Upload"}
         </button>
+        <a
+          href="/admin/dashboard/data/googledrive"
+          className="block w-full rounded-[5px] active:bg-green-700 bg-green-500 px-4 py-3 text-white font-semibold text-center"
+        > 
+          Upload File Google Drive
+        </a>
+        </div>
         { progress > 0 && <div className="flex items-center space-x-2">
             <div className="relative rounded-full overflow-hidden w-full items-center space-x-2 h-5 border border-green-500">
               <div

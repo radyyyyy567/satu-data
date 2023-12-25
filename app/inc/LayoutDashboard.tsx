@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { ArrowLeftOnRectangleIcon, BellIcon, HomeIcon, DocumentIcon, UserIcon } from "@heroicons/react/24/outline";
+import { BookOpenIcon, BellIcon, HomeIcon, DocumentIcon, UserIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { logoKominfo, logoSatuDataIndonesia, userImage } from "../img";
 import Logout from "./Logout";
+import { useSession, getSession } from "next-auth/react"
+import { authOptions } from "@/lib/auth";
 
 
 export const LayoutDashboard = ({
@@ -16,6 +18,8 @@ export const LayoutDashboard = ({
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -42,6 +46,7 @@ export const LayoutDashboard = ({
               />
               </div>
           </div>
+          
           <div className="pt-2 px-2">
               <div className="bg-white shadow p-4 rounded-lg">
                   <div className="text-gray-500 font-semibold uppercase text-xs tracking-[5px]">
@@ -69,6 +74,14 @@ export const LayoutDashboard = ({
                             <UserIcon className="w-5 h-5"/>
                             <span>
                               Users
+                            </span>
+                          </a> 
+                      </li>
+                      <li>
+                          <a href="/admin/dashboard/book" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                            <BookOpenIcon className="w-5 h-5"/>
+                            <span>
+                              Books
                             </span>
                           </a> 
                       </li>
@@ -101,7 +114,7 @@ export const LayoutDashboard = ({
           <div>
             <button
               onClick={toggleSidebar}
-              className="active:bg-gray-100 p-2 rounded-[5px]"
+              className="active:b\g-gray-100 p-2 rounded-[5px]"
             >
               <Bars3Icon className="h-6 w-6 text-gray-900" />
             </button>
@@ -126,7 +139,9 @@ export const LayoutDashboard = ({
                   height={24}
                 />
               </div>
-              <div className="font-semibold tex-gray-800">Kasinda Karissa</div>
+              <div className="font-semibold tex-gray-800">
+                {}
+              </div>
             </div>
           </div>
         </nav>

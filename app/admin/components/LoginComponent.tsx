@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginComponent = () => {
   const router = useRouter();
@@ -24,7 +26,8 @@ const LoginComponent = () => {
       redirect: false,
     });
     if (signInData?.error) {
-      console.log(signInData.error);
+      toast.error(signInData.error) 
+      console.log(signInData.error)
     } else {
       router.push("/admin/dashboard/data");
     }
@@ -41,6 +44,7 @@ const LoginComponent = () => {
   return (
     <div className="bg-white rounded-xl p-10 shadow divide-y-4 space-y-2 divide-red-400">
       <div className="flex space-x-3 justify-center">
+        <ToastContainer />
         <Image
           loading="lazy"
           src={logoPemkabPelalawan}

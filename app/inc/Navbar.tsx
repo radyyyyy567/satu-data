@@ -41,18 +41,26 @@ const Navbar = () => {
               className="lg:h-[40px] h-[30px] w-auto"
             />
           </div>
-          <div className="lg:flex hidden items-center space-x-4 text-[16px]">
+          <div className="lg:flex hidden items-center space-x-4 text-[16px] font-semibold">
             <div>
               <ul className="space-x-4 flex items-center">
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-[#1e1e1e] hover:text-red-500 transition-all duration-300"
                   >
                     Beranda
                   </a>
                 </li>
-                <li className="relative group">
+                <li>
+                  <a
+                    href="/data/"
+                    className="text-[#1e1e1e] hover:text-red-500 transition-all duration-300"
+                  >
+                    Open Data
+                  </a>
+                </li>
+                <li className="relative group hidden">
                   <div className="cursor-pointer text-[#1e1e1e] hover:text-red-500 transition-all duration-300 flex space-x-2 items-center ">
                     <div>Data</div>
                     <div>
@@ -73,7 +81,7 @@ const Navbar = () => {
                             href="/data"
                             className="text-[#1e1e1e] block hover:text-red-500 transition-all duration-300 py-[10px] px-[20px]"
                           >
-                            Statistik Sektorat
+                            Statistik Sektoral
                           </a>
                         </li>
                         <li className="p-2">
@@ -143,6 +151,14 @@ const Navbar = () => {
                       </ul>
                     </div>
                   </div>
+                </li>
+                <li>
+                  <a
+                    href="/data-sektoral"
+                    className="text-[#1e1e1e] hover:text-red-500 transition-all duration-300"
+                  >
+                    Data Sektoral
+                  </a>
                 </li>
                 <li>
                   <a

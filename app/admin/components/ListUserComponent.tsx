@@ -59,11 +59,6 @@ const ListUserComponent = () => {
       sortable: true,
     },
     {
-      name: 'Email',
-      selector: 'email',
-      sortable: true,
-    },
-    {
       name: 'Role',
       selector: 'role',
       sortable: true,

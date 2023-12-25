@@ -5,11 +5,16 @@ import DataTable from 'react-data-table-component';
 import Link from 'next/link';
 import FileDownloadComponent from './FileDownloadComponent';
 import { toast } from 'react-toastify';
+import DetailComponent from './DetailComponent';
 
 interface FileData {
   id: string;
   title: string;
   filename: string;
+  category: string;
+  description: string;
+  linkdrive: string;
+  rowIndex: number;
   uploader: {
     username: string;
     role: string;
@@ -45,8 +50,10 @@ const ListDataPostAdmin = () => {
         toast.error("Data Gagal Dihapus " + error.response?.data?.message)
     }
   }
-
+  
+  
   const columns: any = [
+    
     // ... previous column definitions ...
     {
         name: 'No.',
@@ -55,7 +62,7 @@ const ListDataPostAdmin = () => {
         cell: (row: any, index: number) => (
           <div className="w-[10px]">{index + 1}</div>
         ),
-        width: "7%"
+        width: "8%"
       },
       {
         name: 'Title',
@@ -64,36 +71,55 @@ const ListDataPostAdmin = () => {
         width: ""
       },
       {
-        name: 'Uploader Username',
+        name: 'Pengupload',
         selector: 'uploader.username',
         sortable: true,
+        width: "12%"
       },
       {
-        name: 'Uploader Role',
+        name: 'OPD',
         selector: 'uploader.role',
         sortable: true,
+        width: "12%"
       },
       {
         name: 'Release Date',
         selector: 'createdAt',
         sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+        width: "12%"
+      },
+      {
+        name: 'FileDetail',
+        cell: (row: FileData) => (
+          <div className='p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
+            {
+              <a href={`/admin/dashboard/data/${row.filename}`}>Detail</a>
+            }
+          </div>
+        ),
+        width: "12%"
       },
       {
         name: 'Download',
         cell: (row: FileData) => (
-          <FileDownloadComponent fileName={row.filename} />
+          <div className='p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
+            {
+              row.linkdrive ? <a href={row.linkdrive} target="_blank" >Download</a> : <FileDownloadComponent fileName={row.filename} title={row.title} />
+            }
+          </div>
         ),
+        width: "12%"
       },
       {
         name: 'Actions',
         cell: (row: FileData) => (
           <div className='flex space-x-2'>
-            <button className='text-xs p-1 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</button>
-            <button onClick={() => deleteFile(row.id)} className='p-1 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
+            <button className='text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</button>
+            <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
           </div>
-        ),
-      },
+        )
+      }
   ];
 
   return (
@@ -113,10 +139,11 @@ const ListDataPostAdmin = () => {
           },
           rows: {
             style: {
-              textOverflow: "unset"
+              textOverflow: "unset",
             }
-          }
+          },
         }}
+        
       />
     </div>
   );

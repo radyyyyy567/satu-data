@@ -52,7 +52,7 @@ const DropDownMenu = ({
         {items.map((item, index) => (
           <li key={index} className="px-4 py-2">
             {subItems[index]?.length === 0 || !subItems[index] ? (
-              <a
+              <a  
                 href={links[index]}
                 className="block font-semibold p-2 rounded-md hover:bg-gray-200 w-full hover:text-red-500 transition duration-300"
               >

@@ -8,7 +8,10 @@ import FileDownloadComponent from '../admin/components/FileDownloadComponent';
 interface FileData {
   id: string;
   title: string;
+  description: string;
   filename: string;
+  cateory: string;
+  linkdrive: string;
   uploader: {
     username: string;
     role: string;
@@ -29,7 +32,7 @@ const ListDataPost = () => {
   const getFileData = async () => {
     try {
       const response = await axios.get('/api/file');
-      setData(response.data.AllDataPost || []);
+      setData(response.data.AllDataPost.reverse() || []);
     } catch (error: any) {
       setErrorMessage(error.response?.data?.message || 'An error occurred');
     }
@@ -44,13 +47,14 @@ const ListDataPost = () => {
         cell: (row: any, index: number) => (
           <div className="w-[10px]">{index + 1}</div>
         ),
-        width: "7%"
+        width: "10%"
       },
       {
         name: 'Title',
         selector: 'title',
         sortable: true,
-        width: ""
+        width: "",
+        style: { 'whiteSpace': 'unset' }
       },
       {
         name: 'Uploader Username',
@@ -69,10 +73,26 @@ const ListDataPost = () => {
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
       },
       {
+        name: 'FileDetail',
+        cell: (row: FileData) => (
+          <div className='p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
+            {
+              <a href={`/data/${row.filename}`}>Detail</a>
+            }
+          </div>
+        ),
+        width: "12%"
+      },
+      {
         name: 'Download',
         cell: (row: FileData) => (
-          <FileDownloadComponent fileName={row.filename} />
+          <div className='p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
+            {
+              row.linkdrive ? <a href={row.linkdrive} target="_blank" >Download</a> : <FileDownloadComponent fileName={row.filename} title={row.title} />
+            }
+          </div>
         ),
+        width: "15%"
       },
   ];
 

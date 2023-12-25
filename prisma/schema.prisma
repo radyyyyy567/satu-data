@@ -16,17 +16,37 @@ model User {
   password      String
   role          String
   verification  Boolean   @default(true)
-  datapost      DataPost[]
+  datapost      DataPost[] 
+  bookpost      BookPost[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
 
 model DataPost {
   id            String @id @default(uuid())
-  title         String 
-  filename      String 
+  title         String @unique 
+  description   String
+  filename      String
+  category      String
+  archive       Boolean @default(true)
+  linkdrive     String? 
   uploader      User @relation(fields: [uploaderId], references: [id])
   uploaderId    String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
+
+model BookPost {
+  id            String @id @default(uuid())
+  title         String @unique 
+  description   String?
+  filename      String?
+  category      String?
+  archive       Boolean? @default(true)
+  linkdrive     String? 
+  uploader      User @relation(fields: [uploaderId], references: [id])
+  uploaderId    String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+

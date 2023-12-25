@@ -14,7 +14,6 @@ const MakeUserComponent: React.FC = () => {
 
   const [user, setUser] = useState({
     username: "",
-    email: "",
     password: "",
     confPassword: "",
     role: "",
@@ -23,7 +22,6 @@ const MakeUserComponent: React.FC = () => {
   const resetUserState = () => {
     setUser({
       username: "",
-      email: "",
       password: "",
       confPassword: "",
       role: "",
@@ -46,7 +44,6 @@ const MakeUserComponent: React.FC = () => {
   useEffect(() => {
     if (
       user.username.length > 0 &&
-      user.email.length > 0 &&
       user.password.length > 0 &&
       user.role.length > 0
     ) {
@@ -77,24 +74,6 @@ const MakeUserComponent: React.FC = () => {
               setUser({
                 ...user,
                 username: e.target.value,
-              })
-            }
-            placeholder="Masukkan Username disini"
-            className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
-          />
-        </div>
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-gray-500 text-[12px]">
-            Email
-          </label>
-          <input
-            id="email"
-            type="text"
-            value={user.email}
-            onChange={(e) =>
-              setUser({
-                ...user,
-                email: e.target.value,
               })
             }
             placeholder="Masukkan Username disini"

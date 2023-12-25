@@ -17,22 +17,22 @@ interface User {
 
 export async function POST(req: Request) {
   try {
-    // const session = await getServerSession(authOptions)
-    // const roleSession = await session?.user.role
+    const session = await getServerSession(authOptions)
+    const roleSession = await session?.user.role
 
-    // if (!session || roleSession !== "admin") {
-    // return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
-    // }
+    if (!session || roleSession !== "admin") {
+    return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
+    }
     const body: User = await req.json();
     const { username, email, password, confPassword, role } = body;
 
-    // const registAdmin = await body.role == "admin";
-    // if(registAdmin){
-    //   return NextResponse.json(
-    //     { user: null, message: "Anda tidak bisa menambah admin lagi" },
-    //     { status: 400 }
-    //   )
-    // }
+    const registAdmin = await body.role == "admin";
+    if(registAdmin){
+      return NextResponse.json(
+        { user: null, message: "Anda tidak bisa menambah admin lagi" },
+        { status: 400 }
+      )
+    }
 
     const confPasswordNotMatch = await confPassword != password;
     if(confPasswordNotMatch) {

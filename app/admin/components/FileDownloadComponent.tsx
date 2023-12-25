@@ -3,16 +3,17 @@
 import React from 'react';
 
 interface FileDownloadComponentProps {
+  title:  string;
   fileName: string;
 }
 
-const FileDownloadComponent: React.FC<FileDownloadComponentProps> = ({ fileName }) => {
+const FileDownloadComponent: React.FC<FileDownloadComponentProps> = ({ fileName, title }) => {
   const handleDownload = () => {
     // Create a link to the file using the public folder path
-    const fileURL = `http://localhost:3000/upload/${fileName}`;
+    const fileURL = `http://localhost:5000/products/download/${fileName}/${title}`;
     const link = document.createElement('a');
     link.href = fileURL;
-    link.download = fileName;
+    link.download = `${title}.xlsx`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
