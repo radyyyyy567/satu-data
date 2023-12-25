@@ -23,7 +23,7 @@ CREATE TABLE "DataPost" (
 
     CONSTRAINT "DataPost_pkey" PRIMARY KEY ("id")
 );
-
+dw
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
