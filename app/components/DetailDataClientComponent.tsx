@@ -4,28 +4,31 @@ import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
 interface FileDetailDataClientComponentProps {
-  fileName: string;
+  id: string;
 }
 
-const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = ({ fileName }) => {
-  const [data, setData] = useState<any[]>([]); // Use appropriate type for your data
-  const [columns, setColumns] = useState<any[]>([]); // Columns for the DataTable
-
+const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = ({ id }) => {
+  const [data, setData] = useState<any[]>([]);
+  const [columns, setColumns] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/products/${fileName}`);
-        const rawData = response.data.data;
+        // First, fetch data from '/api/file/{id}'
+        const fileResponse = await axios.get(`/api/file/${id}`);
+        const dataPost = fileResponse.data.dataPostById;
+        const fileName = dataPost.filename;
+        // Next, use the filename to fetch data from 'http://localhost:5000/products/{filename}'
+        const productsResponse = await axios.get(`http://localhost:5000/products/${fileName}`);
+        const rawData = productsResponse.data.data;
 
-        // Extracting the object part from each entry in the array
         const extractedData = rawData.map((entry: any) => {
-          // The entries in the array seem to have an index followed by the object
           return entry.hasOwnProperty('data') ? entry.data : entry;
         });
 
         setData(extractedData);
 
-        // Generate columns from the keys of the first object in the data array
         if (extractedData.length > 0) {
           const keys = Object.keys(extractedData[0]);
           const generatedColumns = keys.map((key: string) => ({
@@ -34,25 +37,33 @@ const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = 
           }));
           setColumns(generatedColumns);
         }
+
+        setIsLoading(false);
       } catch (error) {
         console.log('Error fetching data:', error);
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [fileName]);
+  }, [id]);
 
   return (
     <div className='p-4 w-full overflow-auto space-y-4'>
       <h1 className='text-2xl font-semibold'>Data Detail</h1>
-      <DataTable
-        className="table border rounded"
-        columns={columns}
-        data={data}
-        pagination // Enable pagination if needed
-        highlightOnHover
-        
-      />
+      {isLoading ? (
+        <div className="flex justify-center items-center">
+          <p>Loading...</p>
+        </div>
+      ) : (
+        <DataTable
+          className="table border rounded"
+          columns={columns}
+          data={data}
+          pagination
+          highlightOnHover
+        />
+      )}
     </div>
   );
 };

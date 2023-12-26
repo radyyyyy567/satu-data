@@ -36,10 +36,10 @@ yarn.lock
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+next-env.d.git 
 
 *.rest
-
-/prisma/migrations/
+dd
+/prisma/migrations
 /public/upload/
 /public/uploads/

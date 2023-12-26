@@ -42,6 +42,7 @@ model BookPost {
   description   String?
   filename      String?
   category      String?
+  year          Int?
   archive       Boolean? @default(true)
   linkdrive     String? 
   uploader      User @relation(fields: [uploaderId], references: [id])

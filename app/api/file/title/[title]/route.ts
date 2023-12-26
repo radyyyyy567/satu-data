@@ -1,10 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { existsSync } from "fs";
+import fs from "fs/promises";
+import path from "path";
+import crypto from "crypto";
+import { authOptions } from "@/lib/auth"
+import { getServerSession } from "next-auth"
 import prisma from '@/lib/prisma';
 
 
 export async function GET(req: Request) {
   try {
-    const id = req.url.split("file/")[1];
+    const id = req.url.split("id/")[1];
     const getDataPostById = await prisma.dataPost.findUnique({
         where: {
             id: id
@@ -18,10 +24,6 @@ export async function GET(req: Request) {
         }
       }
     })
-
-    if(!getDataPostById) {
-      return NextResponse.json({ message: "tida ditemukan id"}, {status: 404})
-    } 
 
     return NextResponse.json({ dataPostById: getDataPostById }, { status: 200 })
   } catch (error: any) {

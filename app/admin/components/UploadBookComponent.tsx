@@ -8,6 +8,7 @@ import ListBookPostAdmin from "./ListBookPostAdmin";
 const UploadBookComponent: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
+  const [year, setYear] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -33,6 +34,10 @@ const UploadBookComponent: React.FC = () => {
     setTitle(e.target.value);
   };
 
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setYear(e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!file || !title) {
@@ -43,6 +48,7 @@ const UploadBookComponent: React.FC = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("title", title);
+    formData.append("year", year)
 
     try {
       const response = await axios.post("/api/book", formData, {
@@ -93,6 +99,18 @@ const UploadBookComponent: React.FC = () => {
             placeholder="Judul"
             value={title}
             onChange={handleTitleChange}
+            required
+            className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
+          />
+        </div>
+        <div>
+          <div className="mb-2">Silahkan Masukkan Tahu Buku</div>
+          <input
+            type="number"
+            name="year"
+            placeholder="Tahun"
+            value={year}
+            onChange={handleYearChange}
             required
             className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
           />

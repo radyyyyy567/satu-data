@@ -1,9 +1,10 @@
 import DetailDataClientComponent from "@/app/components/DetailDataClientComponent";
+import DetailDataPostClientComponent from "@/app/components/DetailDataPostClientComponent";
 import DirectStatus from "@/app/inc/DirectStatus";
 import React from "react";
 
-const page = ({ params }: { params: { filename: string } }) => {
-    const namePage = "Detal Data"
+const page = ({ params }: { params: { id: string } }) => {
+    const namePage = "Detail Data"
   return (
     <>
     <section className="mt-[70px] pt-[30px] pb-[60px]">
@@ -11,9 +12,14 @@ const page = ({ params }: { params: { filename: string } }) => {
           <DirectStatus namePage={namePage} />
         </div>
       </section>
+      <section className="">
+        <div className="max-w-5xl mx-auto">
+          <DetailDataPostClientComponent id={params.id} />
+        </div>
+      </section>
       <section className="bg-gray-100">
         <div className="max-w-5xl mx-auto">
-          <DetailDataClientComponent fileName={params.filename} />
+          <DetailDataClientComponent id={params.id} />
         </div>
       </section>
     </>

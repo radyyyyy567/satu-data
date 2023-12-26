@@ -38,14 +38,6 @@ const page = () => {
                   Semua data yang terdaftar pada Satu Data Kabupaten Pelalawan.
                 </h2>
               </div>
-              <div className="border rounded-[5px] mt-8">
-                <button className="flex items-center text-blue-500 focus:outline-none w-full space-x-2 p-4">
-                    <FunnelIcon className="w-6 h-6"/>
-                    <div className="font-semibold">
-                        Filter Data
-                    </div>
-                </button>
-              </div>
               <div className="mt-4">
                 <ListDataPost />
               </div>

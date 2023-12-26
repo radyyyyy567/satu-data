@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { existsSync } from "fs";
-import fs from "fs/promises";
-import path from "path";
 import crypto from "crypto";
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma"
+import { cookies } from "next/headers";
+import axios from "axios";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const session = await getServerSession(authOptions);
@@ -18,6 +17,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   const file = formData.get("file") as File;
   const title = formData.get("title") as string;
+  const yearString = formData.get("year") as string;
+const year = parseInt(yearString);
 
   if (!title || !file) {
     return NextResponse.json({ message: "Please provide a title and select a file!" }, { status: 400 });
@@ -37,21 +38,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ error: "Only PDF files are allowed" }, { status: 400 });
   }
   
-  const destinationDirPath = path.join(process.cwd(), "public/uploads");
-
   const fileBuffer = await file.arrayBuffer();
   const fileNameHash = crypto.createHash('md5').update(Buffer.from(fileBuffer)).digest('hex');
   
-
-  if (!existsSync(destinationDirPath)) {
-    try {
-      await fs.mkdir(destinationDirPath, { recursive: true });
-    } catch (err) {
-      console.error("Error creating directory:", err);
-      return NextResponse.json({ error: "Directory creation failed" }, { status: 500 });
-    }
-  }
-
   const currentDate = new Date();
   const dateString = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1)
     .toString()
@@ -70,18 +59,35 @@ export async function POST(req: NextRequest, res: NextResponse) {
     .padStart(2, '0')}`;
 
   const fileNameHashed = `${fileNameHash}-${dateString}.${fileExtension}`
-  const filePath = path.join(destinationDirPath, fileNameHashed);
+  formData.append("fileName", fileNameHashed);
 
   try {
     const createdDataPost = await prisma.bookPost.create({
       data: {
         title,     
         filename: fileNameHashed,
+        year: year,
         linkdrive: null,
         uploaderId: session.user.id,
       },
     });  
-    await fs.writeFile(filePath, Buffer.from(fileBuffer));
+    const cookieStore = cookies()
+    const token = cookieStore.get('next-auth.session-token')
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/products/pdf",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `${token?.value}`,
+          },
+        }
+      );
+    } catch (error: any) {
+      return NextResponse.json({ message: error.response.data }, { status: 500 });
+    }
+
 
     return NextResponse.json({
       fileName: file.name,

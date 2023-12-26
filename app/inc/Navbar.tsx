@@ -96,7 +96,7 @@ const Navbar = () => {
                     </div>
                   </div>
                 </li>
-                <li className="relative group">
+                <li className="relative group hidden">
                   <div className="cursor-pointer text-[#1e1e1e] hover:text-red-500 transition-all duration-300 flex space-x-2 items-center">
                     <div>Publikasi</div>
                     <div>

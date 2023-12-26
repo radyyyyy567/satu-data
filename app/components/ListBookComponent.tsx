@@ -17,7 +17,7 @@ const ListBookComponent = ({ year }: ListBookProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/book/year/${year}`);
+        const response = await axios.get(`/api/book/${year}`);
         const fetchedBooks: Book[] = response.data.BookPostByYear; // Assuming BookPostByYear contains the array of books
         setBooks(fetchedBooks);
       } catch (error: any) {
@@ -33,7 +33,7 @@ const ListBookComponent = ({ year }: ListBookProps) => {
       <ul>
         {books.map((book) => (
           <li key={book.id}>
-            <a className="" href={`/uploads/${book.filename}`} download>
+            <a className="" href={`http://localhost:5000/products/download/${book.filename}/${book.title}`} download>
               {book.title}
             </a>
           </li>

@@ -25,6 +25,7 @@ interface FileData {
 const ListDataPost = () => {
   const [data, setData] = useState<FileData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     getFileData();
   }, [data]);
@@ -33,8 +34,10 @@ const ListDataPost = () => {
     try {
       const response = await axios.get('/api/file');
       setData(response.data.AllDataPost.reverse() || []);
+      setLoading(false);
     } catch (error: any) {
       setErrorMessage(error.response?.data?.message || 'An error occurred');
+      setLoading(false);
     }
   };
 
@@ -77,7 +80,7 @@ const ListDataPost = () => {
         cell: (row: FileData) => (
           <div className='p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
             {
-              <a href={`/data/${row.filename}`}>Detail</a>
+              <a href={`/data/${row.id}`}>Detail</a>
             }
           </div>
         ),
@@ -98,6 +101,11 @@ const ListDataPost = () => {
 
   return (
     <div className="">
+      {loading ? (
+        <div className="flex justify-center items-center">
+        <p>Loading...</p> {/* You can replace this with your preferred loading indicator */}
+      </div>
+      ) : (
       <DataTable
         className='max-w-auto '
         columns={columns}
@@ -118,6 +126,7 @@ const ListDataPost = () => {
           }
         }}
       />
+      )}
     </div>
   );
 };

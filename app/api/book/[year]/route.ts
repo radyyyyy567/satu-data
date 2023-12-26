@@ -4,14 +4,11 @@ import prisma from "@/lib/prisma";
 
 export async function GET(req: Request) {
   try {
-    const year = req.url.split("year/")[1];
+    const year = req.url.split("book/")[1];
     const intYear = parseInt(year);
     const datapost = await prisma.bookPost.findMany({
         where: {
-            createdAt: {
-              gte: new Date(intYear, 0, 1), // Start of the target year
-              lt: new Date(intYear + 1, 0, 1), // Start of the next year
-            },
+            year: intYear,
           },
     });
 
