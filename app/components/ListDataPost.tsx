@@ -42,35 +42,38 @@ const ListDataPost = () => {
   };
 
   const columns: any = [
+  
     // ... previous column definitions ...
     {
-        name: 'No.',
+        name: <div>No.</div>,
         selector: (row: any, index: number) => index + 1,
         sortable: true,
         cell: (row: any, index: number) => (
-          <div className="w-[10px]">{index + 1}</div>
+          <div className="w-[20px]">{index + 1}</div>
         ),
-        width: "10%"
+        width: "8%"
       },
       {
         name: 'Title',
         selector: 'title',
         sortable: true,
         width: "",
-        style: { 'whiteSpace': 'unset' }
+        wrap: true,
+        style: { overflowWrap: "break-word" },
       },
       {
-        name: 'Uploader Username',
+        name: <div>Uploader Username</div>,
         selector: 'uploader.username',
         sortable: true,
+        style: { overflowWrap: "break-word" },
       },
       {
-        name: 'Uploader Role',
+        name: <div>Produsen Data</div>,
         selector: 'uploader.role',
         sortable: true,
       },
       {
-        name: 'Release Date',
+        name: <div>Tanggal DiPost</div>,
         selector: 'createdAt',
         sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
@@ -107,13 +110,23 @@ const ListDataPost = () => {
       </div>
       ) : (
       <DataTable
-        className='max-w-auto '
+        className='max-w-auto border'
         columns={columns}
         data={data}
         responsive
         pagination
         highlightOnHover
         customStyles={{
+          pagination: {
+            style: {
+              border: "1px solid black"
+            }
+          },
+          header:{
+            style: {
+              overflowWrap: "break-word"
+            }
+          },
           cells: {
             style: {
               textOverflow: "unset"

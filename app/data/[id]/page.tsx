@@ -7,17 +7,17 @@ const page = ({ params }: { params: { id: string } }) => {
     const namePage = "Detail Data"
   return (
     <>
-    <section className="mt-[70px] pt-[30px] pb-[60px]">
+    <section className="mt-[70px] py-[30px]">
         <div className="max-w-5xl mx-auto">
           <DirectStatus namePage={namePage} />
         </div>
       </section>
-      <section className="">
+      <section className="bg-gray-100">
         <div className="max-w-5xl mx-auto">
           <DetailDataPostClientComponent id={params.id} />
         </div>
       </section>
-      <section className="bg-gray-100">
+      <section className="bg-gray-100 pb-[30px]">
         <div className="max-w-5xl mx-auto">
           <DetailDataClientComponent id={params.id} />
         </div>
