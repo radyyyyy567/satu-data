@@ -17,7 +17,7 @@ interface FileData {
     role: string;
   };
   createdAt: string;
-  
+  publish: string;
 }
 
 
@@ -32,8 +32,8 @@ const ListDataPost = () => {
 
   const getFileData = async () => {
     try {
-      const response = await axios.get('/api/file');
-      setData(response.data.AllDataPost.reverse() || []);
+      const response = await axios.get('/api/file/publish');
+      setData(response.data.allPublishDataPost.reverse() || []);
       setLoading(false);
     } catch (error: any) {
       setErrorMessage(error.response?.data?.message || 'An error occurred');
@@ -51,7 +51,7 @@ const ListDataPost = () => {
         cell: (row: any, index: number) => (
           <div className="w-[20px]">{index + 1}</div>
         ),
-        width: "8%"
+        width: "5%",
       },
       {
         name: 'Title',
@@ -62,21 +62,24 @@ const ListDataPost = () => {
         style: { overflowWrap: "break-word" },
       },
       {
-        name: <div>Uploader Username</div>,
-        selector: 'uploader.username',
+        name: 'OPD',
+        selector: 'uploader.role',
         sortable: true,
+        width: "",
+        wrap: true,
         style: { overflowWrap: "break-word" },
       },
       {
-        name: <div>Produsen Data</div>,
-        selector: 'uploader.role',
-        sortable: true,
-      },
-      {
-        name: <div>Tanggal DiPost</div>,
+        name: <div>Tanggal Di Rilis</div>,
         selector: 'createdAt',
         sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+      },
+      {
+        name: <div>Tanggal Di Publikasi</div>,
+        selector: 'publish',
+        sortable: true,
+        format: (row: FileData) => new Date(row.publish).toLocaleDateString(),
       },
       {
         name: 'FileDetail',
@@ -119,17 +122,25 @@ const ListDataPost = () => {
         customStyles={{
           pagination: {
             style: {
-              border: "1px solid black"
+              border: "1px solid rgba(0,0,0,.12)",
+              borderTop: "0px"
             }
           },
-          header:{
+          headCells:{
             style: {
-              overflowWrap: "break-word"
+              overflowWrap: "break-word",
+              backgroundColor: "blue",
+              color: "white",
+              borderRight: "1px solid white",
+              margin: "0",
+              padding: "0px 10px"
             }
           },
           cells: {
             style: {
-              textOverflow: "unset"
+              textOverflow: "unset",
+              padding: "0px 10px",
+              borderRight: "1px solid rgba(0,0,0,.12)"
             }
           },
           rows: {

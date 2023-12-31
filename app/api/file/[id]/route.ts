@@ -22,6 +22,7 @@ export async function GET(req: Request) {
     if(!getDataPostById) {
       return NextResponse.json({ message: "tida ditemukan id"}, {status: 404})
     } 
+    
 
     return NextResponse.json({ dataPostById: getDataPostById }, { status: 200 })
   } catch (error: any) {

@@ -42,11 +42,11 @@ const ListBookPostAdmin = () => {
 
   const deleteFile = async (id: string) => {
     try{
-        const deleteFileSelected = await axios.delete('/api/file/' + id);
+        const deleteFileSelected = await axios.delete('/api/book/' + id);
         getFileData();
-        toast.success("Data Berhasil Dihapus")
+        toast.success("Buku Berhasil Dihapus")
     } catch (error: any){
-        toast.error("Data Gagal Dihapus " + error.response?.data?.message)
+        toast.error("Buku Gagal Dihapus " + error.response?.data?.message)
     }
   }
   
@@ -103,7 +103,7 @@ const ListBookPostAdmin = () => {
         name: 'Actions',
         cell: (row: FileData) => (
           <div className='flex space-x-2'>
-            <button className='text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</button>
+            <a href={`book/${row.id}`} className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</a>
             <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
           </div>
         )

@@ -75,7 +75,7 @@ const year = parseInt(yearString);
     const token = cookieStore.get('next-auth.session-token')
     try {
       const response = await axios.post(
-        "http://localhost:5000/products/pdf",
+        `${process.env.NEXT_PUBLIC_API_URL}/products/pdf`,
         formData,
         {
           headers: {

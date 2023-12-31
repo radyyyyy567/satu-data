@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 
 export async function GET(req: Request) {
   try {
-    const year = req.url.split("book/")[1];
+    const year = req.url.split("year/")[1];
     const intYear = parseInt(year);
     const datapost = await prisma.bookPost.findMany({
         where: {

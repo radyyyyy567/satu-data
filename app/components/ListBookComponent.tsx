@@ -17,7 +17,7 @@ const ListBookComponent = ({ year }: ListBookProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/book/${year}`);
+        const response = await axios.get(`/api/book/year/${year}`);
         const fetchedBooks: Book[] = response.data.BookPostByYear; // Assuming BookPostByYear contains the array of books
         setBooks(fetchedBooks);
       } catch (error: any) {
@@ -28,19 +28,24 @@ const ListBookComponent = ({ year }: ListBookProps) => {
     fetchData();
   }, [year]);
 
-  return (
+  return ( 
     <div>
       <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            <a className="" href={`http://localhost:5000/products/download/${book.filename}/${book.title}`} download>
-              {book.title}
-            </a>
-          </li>
-        ))}
+        {books.length === 0 ? (
+          <li className="text-gray-700">Belum ada buku terbit di tahun {year}</li>
+        ) : (
+          books.map((book) => (
+            <li key={book.id}>
+              <a className="" href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/${book.filename}/${book.title}`} download>
+                {book.title}
+              </a>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
+  
 };
 
 export default ListBookComponent;

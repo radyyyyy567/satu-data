@@ -28,6 +28,7 @@ model DataPost {
   description   String
   filename      String
   category      String
+  publish       DateTime?
   archive       Boolean @default(true)
   linkdrive     String? 
   uploader      User @relation(fields: [uploaderId], references: [id])

@@ -11,7 +11,7 @@ interface DetailDataPostClientComponent {
 const DetailDataPostClientComponent: React.FC<
   DetailDataPostClientComponent
 > = ({ id }) => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] =  useState<boolean>(true);
   const [dataTitle, setDataTitle] = useState<any>(null); // Update 'any' to your data structure
   const [date, setDate] = useState<string>("");
 

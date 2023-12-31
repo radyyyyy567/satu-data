@@ -1,18 +1,19 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import DataTable from 'react-data-table-component';
-
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import DataTable from "react-data-table-component";
 
 interface FileDetailDataClientComponentProps {
   id: string;
 }
 
-const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = ({ id }) => {
+const DetailDataClientComponent: React.FC<
+  FileDetailDataClientComponentProps
+> = ({ id }) => {
   const [data, setData] = useState<any[]>([]);
   const [columns, setColumns] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,11 +22,13 @@ const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = 
         const dataPost = fileResponse.data.dataPostById;
         const fileName = dataPost.filename;
         // Next, use the filename to fetch data from 'http://localhost:5000/products/{filename}'
-        const productsResponse = await axios.get(`http://localhost:5000/products/${fileName}`);
+        const productsResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/products/${fileName}`
+        );
         const rawData = productsResponse.data.data;
 
         const extractedData = rawData.map((entry: any) => {
-          return entry.hasOwnProperty('data') ? entry.data : entry;
+          return entry.hasOwnProperty("data") ? entry.data : entry;
         });
 
         setData(extractedData);
@@ -37,13 +40,14 @@ const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = 
             selector: key,
             sortable: true,
             style: { overflowWrap: "break-word" },
+            cell: (row: any) => <div>{row[key]}</div>
           }));
           setColumns(generatedColumns);
         }
 
         setIsLoading(false);
       } catch (error) {
-        console.log('Error fetching data:', error);
+        console.log("Error fetching data:", error);
         setIsLoading(false);
       }
     };
@@ -52,8 +56,8 @@ const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = 
   }, [id]);
 
   return (
-    <div className='p-8 w-full bg-white overflow-auto space-y-4 rounded-b-lg'>
-      <h1 className='text-2xl font-semibold'>Komponen Data</h1>
+    <div className="p-8 w-full bg-white overflow-auto space-y-4 rounded-b-lg">
+      <h1 className="text-2xl font-semibold">Komponen Data</h1>
       {isLoading ? (
         <div className="flex justify-center items-center">
           <p>Loading...</p>
@@ -63,20 +67,27 @@ const DetailDataClientComponent: React.FC<FileDetailDataClientComponentProps> = 
           <DataTable
             className=""
             columns={columns}
-            data={data}            
+            data={data}
             highlightOnHover
             pagination
             customStyles={{
-              rows: {
+              headCells: {
                 style: {
-                  minHeight: 'unset',
-                  padding: "10px 0px"
+                  backgroundColor: "blue",
+                  color: "white",
+                  fontWeight: "700",
+                  borderRight: "1px solid white",
+                },
+              },
+              cells: {
+                style: {
+                  borderRight: "1px solid rgba(0,0,0,.12)",
+                  textOverflow: "unset",
                 },
               },
             }}
           />
         </div>
-        
       )}
     </div>
   );
