@@ -93,6 +93,18 @@ const DetailDataPostClientComponent: React.FC<
               </div>
             </div>
           </div>
+          <div className="p-8 rounded-tl-lg bg-white ">
+            <div className="text-3xl font-semibold mb-8 ">
+              Tautan
+            </div>
+            <div className="">
+              <div className="border flex">
+                <div className="w-full">
+                  <a href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/real/${dataTitle.realfilename}/${dataTitle.title}`} className="block border-b border-r px-4 py-2 text-blue-500">{dataTitle.title}</a>                  
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </div>

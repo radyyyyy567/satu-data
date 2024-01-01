@@ -27,6 +27,7 @@ model DataPost {
   title         String @unique 
   description   String
   filename      String
+  realfilename  String?
   category      String
   publish       DateTime?
   archive       Boolean @default(true)

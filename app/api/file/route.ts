@@ -19,6 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const formData = await req.formData();
 
   const file = formData.get("file") as File;
+  const realFile = formData.get("realfile") as File;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const category = formData.get("category") as string
@@ -28,9 +29,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 
   const fileExtension = getFileExtension(file.name);
+  const realFileExtension = getFileExtension(realFile.name);
   const fileMaxSize = 2 * 1024 * 1024;
 
-  if (file.size > fileMaxSize) {
+  if (realFile.size > fileMaxSize || file.size > fileMaxSize) {
     return NextResponse.json(
       { message: "File terlalu besar upload menggunakan Link Google Drive" },
       { status: 400 }
@@ -42,7 +44,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
   
   const fileBuffer = await file.arrayBuffer();
+  const realFileBuffer = await realFile.arrayBuffer();
   const fileNameHash = crypto.createHash('md5').update(Buffer.from(fileBuffer)).digest('hex');
+  const realFileNameHash = crypto.createHash('md5').update(Buffer.from(realFileBuffer)).digest('hex');
   
   const currentDate = new Date();
   const dateString = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1)
@@ -62,7 +66,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     .padStart(2, '0')}`;
 
   const fileNameHashed = `${fileNameHash}-${dateString}.${fileExtension}`
+  const realFileNameHashed = `${realFileNameHash}-${dateString}.${realFileExtension}`
   formData.append("fileName", fileNameHashed);
+  formData.append("realFileName", realFileNameHashed);
   
 
   try {
@@ -72,6 +78,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         description,
         category,        
         filename: fileNameHashed,
+        realfilename: realFileNameHashed,
         linkdrive: null,
         uploaderId: session.user.id,
       },

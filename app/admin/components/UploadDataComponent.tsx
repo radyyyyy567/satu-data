@@ -8,6 +8,7 @@ import ListDataPostAdmin from "./ListDataPostAdmin";
 
 const UploadDataComponent: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
+  const [realFile, setRealFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -23,6 +24,19 @@ const UploadDataComponent: React.FC = () => {
         selectedFile.name.endsWith(".xls")
       ) {
         setFile(selectedFile);
+      } else {
+        alert("Please select an Excel file (.xlsx or .xls)");
+      }
+    }
+  };
+  const handleRealFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFile = e.target.files[0];
+      if (
+        selectedFile.name.endsWith(".xlsx") ||
+        selectedFile.name.endsWith(".xls")
+      ) {
+        setRealFile(selectedFile);
       } else {
         alert("Please select an Excel file (.xlsx or .xls)");
       }
@@ -45,13 +59,14 @@ const UploadDataComponent: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!file || !title) {
+    if (!realFile || !file || !title) {
       alert("Please select a file and provide a title.");
       return;
     }
 
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("realfile", realFile);
     formData.append("title", title);
     formData.append("description", description);
     formData.append("category", category);
@@ -134,7 +149,7 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div className="space-y-2 spacex-x-2">
-          <div>Silahkan pilih file data yang ingin di upload</div>
+          <div>Silahkan pilih file data yang ingin di tampilkan</div>
           <label
             htmlFor="file"
             className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
@@ -146,6 +161,26 @@ const UploadDataComponent: React.FC = () => {
             type="file"
             id="file"
             onChange={handleFileChange}
+            accept=".xlsx, .xls"
+            className="w-full"
+            required
+            hidden
+          />
+          
+        </div>
+        <div className="space-y-2 spacex-x-2">
+          <div>Silahkan Pilih File Data Asli</div>
+          <label
+            htmlFor="realfile"
+            className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
+          >
+            Pilih File
+          </label>
+          <span className="ml-2">{realFile?.name}</span>
+          <input
+            type="file"
+            id="realfile"
+            onChange={handleRealFileChange}
             accept=".xlsx, .xls"
             className="w-full"
             required
