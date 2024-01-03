@@ -14,7 +14,7 @@ const DetailComponent: React.FC<FileDetailComponentProps> = ({ fileName }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/products/${fileName}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/${fileName}`);
         const rawData = response.data.data;
 
         // Extracting the object part from each entry in the array
