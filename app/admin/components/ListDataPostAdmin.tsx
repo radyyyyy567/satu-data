@@ -114,13 +114,19 @@ const ListDataPostAdmin = () => {
         name: 'OPD',
         selector: 'uploader.role',
         sortable: true,
-        width: "20%"
+        width: "10%"
       },
       {
-        name: 'Release Date',
+        name: 'Data DiPublish',
         selector: 'createdAt',
         sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+        width: "10%"
+      },
+      {
+        name: 'Data DiRilis',
+        selector: 'dataAt',
+        sortable: true,
         width: "10%"
       },
       {

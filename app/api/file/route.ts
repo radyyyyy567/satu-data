@@ -23,6 +23,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const category = formData.get("category") as string
+  const dateAt = formData.get("dateat") as string;
 
   if (!title || !description || !category || !file) {
     return NextResponse.json({ message: "Please provide a title and select a file!" }, { status: 400 });
@@ -76,7 +77,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
       data: {
         title,
         description,
-        category,        
+        category,
+        dataAt: dateAt,        
         filename: fileNameHashed,
         realfilename: realFileNameHashed,
         linkdrive: null,

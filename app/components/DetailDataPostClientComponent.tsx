@@ -72,10 +72,13 @@ const DetailDataPostClientComponent: React.FC<
                     Description
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    Data DiPosting
+                    Data di Rilis
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    Produsen Data
+                    Data di Publish
+                  </div>
+                  <div className=" border-b border-r px-4 py-2">
+                    OPD
                   </div>
                 </div>
                 <div className="w-6/12">
@@ -85,6 +88,7 @@ const DetailDataPostClientComponent: React.FC<
                   <div className="border-b bg-white px-4 py-2">
                     {dataTitle.description}
                   </div>
+                  <div className="border-b bg-white px-4 py-2">{dataTitle.dataAt}</div>
                   <div className="border-b bg-white px-4 py-2">{date}</div>
                   <div className="border-b bg-white px-4 py-2">
                     {dataTitle.uploader.role}

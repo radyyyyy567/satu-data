@@ -70,16 +70,15 @@ const ListDataPost = () => {
         style: { overflowWrap: "break-word" },
       },
       {
-        name: <div>Tanggal Di Rilis</div>,
+        name: <div>Rilis</div>,
         selector: 'createdAt',
         sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
       },
       {
-        name: <div>Tanggal Di Publikasi</div>,
-        selector: 'publish',
+        name: <div>Publish</div>,
+        selector: 'dataAt',
         sortable: true,
-        format: (row: FileData) => new Date(row.publish).toLocaleDateString(),
       },
       {
         name: 'FileDetail',

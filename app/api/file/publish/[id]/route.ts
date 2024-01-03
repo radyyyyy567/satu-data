@@ -7,8 +7,9 @@ export async function PATCH(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
-      NextResponse.json({ message: "authorized" }, { status: 401 });
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
+
     const id = req.url.split("publish/")[1];
     const archiveDataPost = await prisma.dataPost.update({
       where: {
@@ -20,12 +21,14 @@ export async function PATCH(req: Request) {
       },
       data: {
         archive: false,
+        publish: new Date(),
       },
     });
 
-    if(!archiveDataPost){
-        return NextResponse.json({message: "Tidak menemukan data OPD anda"})
+    if (!archiveDataPost) {
+      return NextResponse.json({ message: "Tidak menemukan data OPD anda" }, { status: 404 });
     }
+
     return NextResponse.json(
       {
         status: "Publikasi",
