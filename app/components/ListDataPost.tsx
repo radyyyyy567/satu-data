@@ -54,7 +54,7 @@ const ListDataPost = () => {
         width: "5%",
       },
       {
-        name: 'Title',
+        name: 'Judul',
         selector: 'title',
         sortable: true,
         width: "",
@@ -70,13 +70,17 @@ const ListDataPost = () => {
         style: { overflowWrap: "break-word" },
       },
       {
-        name: <div>Rilis</div>,
+        name: <div>Publish</div>,
         selector: 'createdAt',
         sortable: true,
-        format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+        format: (row: FileData) => {
+          const formattedDate = new Date(row.createdAt).toISOString().split('T')[0];
+          return formattedDate;
+        },
+        
       },
       {
-        name: <div>Publish</div>,
+        name: <div>Rilis</div>,
         selector: 'dataAt',
         sortable: true,
       },

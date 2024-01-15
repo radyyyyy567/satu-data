@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { existsSync } from "fs";
-import fs from "fs/promises";
-import path from "path";
 import crypto from "crypto";
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
@@ -78,7 +75,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         title,
         description,
         category,
-        dataAt: dateAt,        
+        dataAt: dateAt,
+        archive: false,
         filename: fileNameHashed,
         realfilename: realFileNameHashed,
         linkdrive: null,

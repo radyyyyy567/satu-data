@@ -82,7 +82,7 @@ const ListDataPostAdmin = () => {
         borderRight: "1px solid rgba(0,0,0,.12)"
       },
       {
-        name: 'Title',
+        name: 'Data',
         selector: 'title',
         sortable: true,
         width: "20%"
@@ -101,7 +101,7 @@ const ListDataPostAdmin = () => {
         cell: (row: FileData) => (
           <div>
             {row.archive ? (
-              <div className='bg-red-500 p-1 text-white font-semibold rounded'>
+              <div className='bg-yellow-500 p-1 text-white font-semibold rounded'>
                 Arsip
               </div>
             ) : (<div className='bg-green-400 p-1 text-white font-semibold rounded'>
@@ -117,14 +117,17 @@ const ListDataPostAdmin = () => {
         width: "10%"
       },
       {
-        name: 'Data DiPublish',
+        name: 'Data di Publish',
         selector: 'createdAt',
         sortable: true,
-        format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+        format: (row: FileData) => {
+          const formattedDate = new Date(row.createdAt).toISOString().split('T')[0];
+          return formattedDate;
+        },
         width: "10%"
       },
       {
-        name: 'Data DiRilis',
+        name: 'Data di Rilis',
         selector: 'dataAt',
         sortable: true,
         width: "10%"
@@ -134,7 +137,7 @@ const ListDataPostAdmin = () => {
         cell: (row: FileData) => (
           <div className='p-2 w-full text-center bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
             {
-              <a href={`/admin/dashboard/data/${row.filename}`}>Detail</a>
+              <a href={`/admin/dashboard/data/${row.id}`}>Detail</a>
             }
           </div>
         ),
@@ -156,15 +159,15 @@ const ListDataPostAdmin = () => {
         cell: (row: FileData) => (
           <div className='space-y-2'>
             {!row.archive ? (
-              <button onClick={() => archiveDataPost(row.id)} className='bg-red-500 p-1 text-white font-semibold rounded'>
+              <button onClick={() => archiveDataPost(row.id)} className='bg-yellow-500 p-2 text-white font-semibold rounded'>
                 Arsip
               </button>) : 
-            (<button onClick={() => publishDataPost(row.id)} className='bg-green-400 p-1 text-white font-semibold rounded'>
+            (<button onClick={() => publishDataPost(row.id)} className='bg-green-400 p-2 text-white font-semibold rounded'>
               Publikasi
             </button>)
             }
-            <button className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</button>
-            <button onClick={() => deleteFile(row.id)} className='block p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
+            {/* <button className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</button>
+            <button onClick={() => deleteFile(row.id)} className='block p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button> */}
           </div>
         ),
       }

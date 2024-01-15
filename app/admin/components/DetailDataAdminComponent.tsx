@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 
-interface FileDetailDataClientComponentProps {
+interface FileDetailDataAdminComponentProps {
   id: string;
 }
 
-const DetailDataClientComponent: React.FC<
-  FileDetailDataClientComponentProps
+const DetailDataAdminComponent: React.FC<
+  FileDetailDataAdminComponentProps
 > = ({ id }) => {
   const [data, setData] = useState<any[]>([]);
   const [columns, setColumns] = useState<any[]>([]);
@@ -35,8 +35,7 @@ const DetailDataClientComponent: React.FC<
 
         if (extractedData.length > 0) {
           const keys = Object.keys(extractedData[0]);
-        
-          // Add a new column for the number index    
+            
           const generatedColumns = [...keys.map((key) => ({
             name: <div>{key}</div>,
             selector: key,
@@ -96,4 +95,4 @@ const DetailDataClientComponent: React.FC<
   );
 };
 
-export default DetailDataClientComponent;
+export default DetailDataAdminComponent;

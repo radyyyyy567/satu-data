@@ -4,9 +4,7 @@ import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { logoKominfo, logoSatuDataIndonesia, userImage } from "../img";
 import Logout from "./Logout";
-import { useSession, getSession } from "next-auth/react"
-import { authOptions } from "@/lib/auth";
-
+import { usePathname } from "next/navigation";
 
 export const LayoutDashboard = ({
   children,
@@ -21,8 +19,10 @@ export const LayoutDashboard = ({
 
   
 
+  // Get the current path (without the domain)
+  const pathname = usePathname();
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen ove\rflow-hidden">
       <section
         className={`w-[300px] h-full flex flex-col justify-between  bg-gray-200 transition-all duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -54,7 +54,7 @@ export const LayoutDashboard = ({
                   </div>
                   <ul className="mt-4">
                       <li>
-                          <a href="/admin/dashboard" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                          <a href="/admin/dashboard" className={`${pathname == '/admin/dashboard' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <HomeIcon className="w-5 h-5" />
                             <span>
                               Dashboard
@@ -62,15 +62,15 @@ export const LayoutDashboard = ({
                           </a> 
                       </li>
                       <li>
-                          <a href="/admin/dashboard/data" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                          <a href="/admin/dashboard/data" className={`${pathname == '/admin/dashboard/data' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <DocumentIcon className="w-5 h-5"/>
                             <span>
-                              Data
+                              Open Data
                             </span>
                           </a> 
                       </li>
                       <li>
-                          <a href="/admin/dashboard/user" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                          <a href="/admin/dashboard/user" className={`${pathname == '/admin/dashboard/user' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <UserIcon className="w-5 h-5"/>
                             <span>
                               Users
@@ -78,10 +78,10 @@ export const LayoutDashboard = ({
                           </a> 
                       </li>
                       <li>
-                          <a href="/admin/dashboard/book" className="flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg ">
+                          <a href="/admin/dashboard/book" className={`${pathname == '/admin/dashboard/book' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <BookOpenIcon className="w-5 h-5"/>
                             <span>
-                              Books
+                              Data Sektoral
                             </span>
                           </a> 
                       </li>

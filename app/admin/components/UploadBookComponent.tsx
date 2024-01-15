@@ -145,12 +145,12 @@ const UploadBookComponent: React.FC = () => {
         > 
           {loading ? "Proses..." : "Upload"}
         </button>
-        <a
+        {/* <a
           href="/admin/dashboard/data/googledrive"
           className="block w-full rounded-[5px] active:bg-green-700 bg-green-500 px-4 py-3 text-white font-semibold text-center"
         > 
           Upload File Google Drive
-        </a>
+        </a> */}
         </div>
         { progress > 0 && <div className="flex items-center space-x-2">
             <div className="relative rounded-full overflow-hidden w-full items-center space-x-2 h-5 border border-green-500">

@@ -61,10 +61,11 @@ const ListBookPostAdmin = () => {
         cell: (row: any, index: number) => (
           <div className="w-[10px]">{index + 1}</div>
         ),
-        width: "8%"
+        width: "5%",
+        borderRight: "1px solid rgba(0,0,0,.12)"
       },
       {
-        name: 'Title',
+        name: 'Judul',
         selector: 'title',
         sortable: true,
         width: ""
@@ -82,10 +83,16 @@ const ListBookPostAdmin = () => {
         width: "12%"
       },
       {
-        name: 'Release Date',
+        name: 'Data di Publish',
         selector: 'createdAt',
-        sortable: true,
+          sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+        width: "12%"
+      },
+      {
+        name: 'Tahun',
+        selector: 'year',
+        sortable: true,
         width: "12%"
       },
       {
@@ -99,15 +106,15 @@ const ListBookPostAdmin = () => {
         ),
         width: "12%"
       },
-      {
-        name: 'Actions',
-        cell: (row: FileData) => (
-          <div className='flex space-x-2'>
-            <a href={`book/${row.id}`} className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</a>
-            <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
-          </div>
-        )
-      }
+      // {
+      //   name: 'Actions',
+      //   cell: (row: FileData) => (
+      //     <div className='flex space-x-2'>
+      //       <a href={`book/${row.id}`} className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</a>
+      //       <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
+      //     </div>
+      //   )
+      // }
   ];
 
   return (
@@ -120,9 +127,30 @@ const ListBookPostAdmin = () => {
         pagination
         highlightOnHover
         customStyles={{
+          table: {
+            style: {
+              borderLeft: "1px solid rgba(0,0,0,.12)"
+            }
+          },
+          headCells: {
+            style: {
+              padding: "5px",
+              margin: "0px",
+              borderRight: "1px solid white",
+              backgroundColor: "blue",
+              color: "white",
+              fontWeight: "700",
+              textOverflow: "unset",
+              overflowWrap: "break-word"
+            }
+          },
           cells: {
             style: {
-              textOverflow: "unset"
+              textOverflow: "unset",
+              padding: "5px",
+              margin: "0px",
+              borderRight: "1px solid rgba(0,0,0,.12)",
+              alignItems: "start"
             }
           },
           rows: {

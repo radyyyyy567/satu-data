@@ -1,15 +1,15 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import FileDownloadComponent from "../admin/components/FileDownloadComponent";
 import { ArrowDownCircleIcon } from "@heroicons/react/24/solid";
+import FileDownloadComponent from "./FileDownloadComponent";
 
-interface DetailDataPostClientComponent {
+interface DetailDataPostAdminComponent {
   id: string;
 }
 
-const DetailDataPostClientComponent: React.FC<
-  DetailDataPostClientComponent
+const DetailDataPostAdminComponent: React.FC<
+  DetailDataPostAdminComponent
 > = ({ id }) => {
   const [loading, setLoading] =  useState<boolean>(true);
   const [dataTitle, setDataTitle] = useState<any>(null); // Update 'any' to your data structure
@@ -115,4 +115,4 @@ const DetailDataPostClientComponent: React.FC<
   );
 };
 
-export default DetailDataPostClientComponent;
+export default DetailDataPostAdminComponent;

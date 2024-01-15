@@ -3,14 +3,13 @@ import { getServerSession } from "next-auth"
 import { cookies } from 'next/headers'
 
 const page = async () => {
-  const cookieStore = cookies()
-  const theme = cookieStore.get('next-auth.session-token')
-  console.log(theme?.value)
+  const session = await getServerSession(authOptions);
+  
   return (
     <div>
         <section className="p-4">
           <div className="text-xl font-bold">
-            Halo, 
+            Halo, {session?.user.username}
           </div>
           <div className="text-sm">
             Ini adalah Halaman Dashboard Admin

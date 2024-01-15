@@ -12,6 +12,11 @@ function getFileExtension(filename: string): string {
 
 export async function GET(req: Request) {
   try {
+    const session = await getServerSession(authOptions);
+  
+   if(!session){
+    return NextResponse.json({ message: "Unauthorized" }, { status: 400 });
+  }
     const id = req.url.split("book/")[1];
     const oneBookpost = await prisma.bookPost.findUnique({
       where: {

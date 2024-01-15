@@ -4,8 +4,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ListDataPostAdmin from "./ListDataPostAdmin";
+import { useRouter } from "next/navigation";
 
-const UploadDataComponent: React.FC = () => {
+interface UpdateDataComponent {
+    id: string
+}
+
+const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
+    const route =  useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [realFile, setRealFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
@@ -155,7 +161,7 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Tanggal Data di Rilis</div>
+          <div className="mb-2">Tanggal Data Di Rilis</div>
             <input
               type="date"
               name="dateat"
@@ -182,11 +188,10 @@ const UploadDataComponent: React.FC = () => {
             onChange={handleFileChange}
             accept=".xlsx, .xls"
             className="w-full"
-            required
             hidden
           />
         </div>
-        <div className="space-y-2 spacex-x-2">
+        {/* <div className="space-y-2 spacex-x-2">
           <div>Silahkan Pilih File Tautan</div>
           <label
             htmlFor="realfile"
@@ -204,7 +209,7 @@ const UploadDataComponent: React.FC = () => {
             required
             hidden
           />
-        </div>
+        </div> */}
         <div className="flex items-center gap-x-2">
           <button
             type="submit"
@@ -246,4 +251,4 @@ const UploadDataComponent: React.FC = () => {
   );
 };
 
-export default UploadDataComponent;
+export default UpdateDataComponent;
