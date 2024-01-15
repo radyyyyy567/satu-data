@@ -88,7 +88,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const token = cookieStore.get('next-auth.session-token')
     try {
       const response = await axios.post(
-        "http://localhost:5000/products",
+        `${process.env.NEXT_PUBLIC_URL}}/products`,
         formData,
         {
           headers: {
