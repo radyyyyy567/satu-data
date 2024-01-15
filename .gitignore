@@ -43,3 +43,4 @@ dd
 /prisma/migrations
 /public/upload/
 /public/uploads/
+yarn.lock
