@@ -12,6 +12,7 @@ interface FileData {
   filename: string;
   cateory: string;
   linkdrive: string;
+  dataAt: string;
   uploader: {
     username: string;
     role: string;
@@ -55,7 +56,7 @@ const ListDataPost = () => {
       },
       {
         name: 'Judul',
-        selector: 'title',
+        selector: (row: FileData) => row.title,
         sortable: true,
         width: "",
         wrap: true,
@@ -63,7 +64,7 @@ const ListDataPost = () => {
       },
       {
         name: 'OPD',
-        selector: 'uploader.role',
+        selector: (row: FileData) => row.uploader.role,
         sortable: true,
         width: "",
         wrap: true,
@@ -71,7 +72,7 @@ const ListDataPost = () => {
       },
       {
         name: <div>Publish</div>,
-        selector: 'createdAt',
+        selector: (row: FileData) => row.createdAt,
         sortable: true,
         format: (row: FileData) => {
           const formattedDate = new Date(row.createdAt).toISOString().split('T')[0];
@@ -81,7 +82,7 @@ const ListDataPost = () => {
       },
       {
         name: <div>Rilis</div>,
-        selector: 'dataAt',
+        selector: (row: FileData) => row.dataAt,
         sortable: true,
       },
       {

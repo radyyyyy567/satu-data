@@ -127,7 +127,7 @@ const UpdateBookComponent: React.FC<UpdateBookComponent> = ({id}) => {
             className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
           />
         </div>
-        <div className="space-y-2 spacex-x-2">
+        <div className="space-y-2 spacex-x-2 hidden">
           <div>Silahkan pilih file buku yang ingin di upload</div>
           <label
             htmlFor="file"
@@ -150,18 +150,12 @@ const UpdateBookComponent: React.FC<UpdateBookComponent> = ({id}) => {
         <button
           type="submit"
           className={`block w-full rounded-[5px] ${
-            buttonDisabled ? "bg-gray-500" : "active:bg-red-700 bg-red-500"
+            buttonDisabled ? "bg-gray-500" : "active:bg-green-700 bg-green-500"
           }  px-4 py-3 text-white font-semibold text-center`}
           disabled={buttonDisabled}
         > 
           {loading ? "Proses..." : "Upload"}
         </button>
-        <a
-          href="/admin/dashboard/data/googledrive"
-          className="block w-full rounded-[5px] active:bg-green-700 bg-green-500 px-4 py-3 text-white font-semibold text-center"
-        > 
-          Upload File Google Drive
-        </a>
         </div>
         { progress > 0 && <div className="flex items-center space-x-2">
             <div className="relative rounded-full overflow-hidden w-full items-center space-x-2 h-5 border border-green-500">

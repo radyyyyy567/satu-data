@@ -68,7 +68,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   formData.append("fileName", fileNameHashed);
   formData.append("realFileName", realFileNameHashed);
   
-
   try {
     const createdDataPost = await prisma.dataPost.create({
       data: {
@@ -82,13 +81,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
         linkdrive: null,
         uploaderId: session.user.id,
       },
-    });  
-
-    const cookieStore = cookies()
-    const token = cookieStore.get('next-auth.session-token')
+    });
+  
+    if (!createdDataPost) {
+      return NextResponse.json({ message: "Gagal menyimpan Data" }, { status: 599 });
+    }
+  
+    const cookieStore = cookies();
+    const token = cookieStore.get('next-auth.session-token');
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}}/products`,
+        `${process.env.NEXT_PUBLIC_API_URL}/products`,
         formData,
         {
           headers: {
@@ -98,15 +101,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
       );
     } catch (error: any) {
-      return NextResponse.json({ message: error.response.data }, { status: 500 });
+      const errorMessage = error || "Unknown error occurred";
+      console.log(errorMessage)
+      return NextResponse.json({ message: errorMessage }, { status: 500 });
     }
-
+  
     return NextResponse.json({
       fileName: file.name,
       size: file.size,
       lastModified: new Date(file.lastModified),
     }, { status: 200 });
-    
+  
   } catch (err) {
     console.error("Error Upload File:", err);
     return NextResponse.json({ error: "Failed to upload data" }, { status: 500 });

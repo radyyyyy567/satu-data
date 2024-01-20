@@ -1,4 +1,4 @@
-import UpdateDataComponent from '@/app/admin/components/UpdateBookComponent'
+import UpdateDataComponent from '@/app/admin/components/UpdateDataComponent'
 import React from 'react'
 
 const page = ({ params }: { params: { id: string } }) => {

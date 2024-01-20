@@ -11,7 +11,7 @@ interface UpdateDataComponent {
 }
 
 const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
-    const route =  useRouter();
+  const route =  useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [realFile, setRealFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
@@ -22,7 +22,6 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
   const [progress, setProgress] = useState(0);
   const [dateAt, setDateAt] = useState("");
   const today = new Date().toISOString().split('T')[0];
-
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -70,21 +69,20 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!realFile || !file || !title) {
+    if (!title) {
       alert("Please select a file and provide a title.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("realfile", realFile);
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("category", category);
-    formData.append("dateat", dateAt); 
+    formData.append("file", file || '');
+    formData.append("title" , title);
+    formData.append("description" , description);
+    formData.append("category" , category);
+    formData.append("dateat" , dateAt); 
 
     try {
-      const response = await axios.post("/api/file", formData, {
+      const response = await axios.patch(`/api/file/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -98,7 +96,8 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
         },
       });
       setLoading(true);
-      toast.success("Upload Data Berhasil");
+      toast.success("Update Data Berhasil");
+      route.push("/admin/dashboard/data")      
     } catch (error: any) {
       console.log(error.response.data.message);
       toast.error("Proses Upload Data Gagal " + error.response.data.message);
@@ -110,12 +109,22 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
   };
 
   useEffect(() => {
-    if (title.length > 0) {
-      setButtonDisabled(false);
-    } else {
-      setButtonDisabled(true);
-    }
-  }, [title]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/file/${id}`)
+        setTitle(response.data.getDataPostById.title)
+        setDescription(response.data.getDataPostById.description)
+        setCategory(response.data.getDataPostById.category)
+        const serverDataAt = response.data.getDataPostById.dataAt;
+        const parsedDate = serverDataAt ? new Date(serverDataAt).toISOString().split('T')[0] : "";
+        setDateAt(parsedDate);
+        console.log(response)
+      } catch (error: any) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   return (
     <div className="p-4">
@@ -213,10 +222,8 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
         <div className="flex items-center gap-x-2">
           <button
             type="submit"
-            className={`block w-full rounded-[5px] ${
-              buttonDisabled ? "bg-gray-500" : "active:bg-green-700 bg-green-500"
-            }  px-4 py-3 text-white font-semibold text-center`}
-            disabled={buttonDisabled}
+            className={`block w-full rounded-[5px] active:bg-green-700 bg-green-500
+            px-4 py-3 text-white font-semibold text-center`}
           >
             {loading ? "Proses..." : "Upload"}
           </button>
@@ -243,10 +250,6 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
           </div>
         )}
       </form>
-      <div className="font-bold text-3xl text-gray-700 mt-8 mb-4">
-        Tabel Data Post
-      </div>
-      <ListDataPostAdmin />
     </div>
   );
 };

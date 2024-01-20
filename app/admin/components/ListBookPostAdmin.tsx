@@ -14,6 +14,7 @@ interface FileData {
   description: string;
   linkdrive: string;
   rowIndex: number;
+  year: string;
   uploader: {
     username: string;
     role: string;
@@ -66,32 +67,32 @@ const ListBookPostAdmin = () => {
       },
       {
         name: 'Judul',
-        selector: 'title',
+        selector: (row: FileData) => row.title,
         sortable: true,
         width: ""
       },
       {
         name: 'Pengupload',
-        selector: 'uploader.username',
+        selector: (row: FileData) => row.uploader.username,
         sortable: true,
         width: "12%"
       },
       {
-        name: 'OPD',
-        selector: 'uploader.role',
+        name: 'Organisasi',
+        selector: (row: FileData) => row.uploader.role,
         sortable: true,
         width: "12%"
       },
       {
-        name: 'Data di Publish',
-        selector: 'createdAt',
-          sortable: true,
+        name: <div>Tanggal di Publish</div>,
+        selector: (row: FileData) => row.createdAt,
+        sortable: true,
         format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
         width: "12%"
       },
       {
         name: 'Tahun',
-        selector: 'year',
+        selector: (row: FileData) => row.year,
         sortable: true,
         width: "12%"
       },
@@ -106,15 +107,15 @@ const ListBookPostAdmin = () => {
         ),
         width: "12%"
       },
-      // {
-      //   name: 'Actions',
-      //   cell: (row: FileData) => (
-      //     <div className='flex space-x-2'>
-      //       <a href={`book/${row.id}`} className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</a>
-      //       <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
-      //     </div>
-      //   )
-      // }
+      {
+        name: 'Opsi',
+        cell: (row: FileData) => (
+          <div className='flex space-x-2'>
+            <a href={`book/${row.id}`} className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</a>
+            <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
+          </div>
+        )
+      }
   ];
 
   return (

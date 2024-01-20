@@ -19,7 +19,7 @@ const DetailDataPostAdminComponent: React.FC<
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/file/${id}`);
-        const fetchedData = response.data.dataPostById;
+        const fetchedData = response.data.getDataPostById;
         console.log(fetchedData);
         setDataTitle(fetchedData);
 
@@ -72,13 +72,13 @@ const DetailDataPostAdminComponent: React.FC<
                     Deskripsi
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    Data di Rilis
+                    Tanggal di Rilis
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    Data di Publish
+                    Tanggal di Publish
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    OPD
+                    Organisasi
                   </div>
                 </div>
                 <div className="w-6/12">

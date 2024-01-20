@@ -190,7 +190,14 @@ export async function PATCH(req: Request) {
             },
           }
         );
-        const response = await axios.post(
+      } catch (error: any) {
+        return NextResponse.json(
+          { message: error.response.data },
+          { status: 500 }
+        );
+      }
+      try {
+        const responsePost = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/products/pdf`,
           formData,
           {
@@ -201,10 +208,7 @@ export async function PATCH(req: Request) {
           }
         );
       } catch (error: any) {
-        return NextResponse.json(
-          { message: error.response.data },
-          { status: 500 }
-        );
+        return NextResponse.json({message: "File Data Sektoral gagal disimpan"}, {status: 500});
       }
     }
 
@@ -223,7 +227,7 @@ export async function PATCH(req: Request) {
       return NextResponse.json(
         {
           SelectedBook: updateBookPost,
-          message: "Data Buku Berhasil diubah",
+          message: "Data Sektoral Berhasil diubah",
         },
         { status: 200 }
       );

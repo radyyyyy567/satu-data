@@ -72,13 +72,13 @@ const DetailDataPostClientComponent: React.FC<
                     Deskripsi
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    Data di Rilis
+                    Tanggal di Rilis
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    Data di Publish
+                    Tanggal di Publish
                   </div>
                   <div className=" border-b border-r px-4 py-2">
-                    OPD
+                    Organisasi
                   </div>
                 </div>
                 <div className="w-6/12">

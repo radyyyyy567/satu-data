@@ -39,7 +39,6 @@ yarn.lock
 next-env.d.git 
 
 *.rest
-dd
 /prisma/migrations
 /public/upload/
 /public/uploads/

@@ -115,11 +115,11 @@ const UploadDataComponent: React.FC = () => {
     <div className="p-4">
       <ToastContainer />
       <div>
-        <div className="font-bold text-2xl">Upload Data</div>
+        <div className="font-bold text-2xl">Upload Open Data</div>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 pt-8">
         <div>
-          <div className="mb-2">Silahkan Masukkan Judul Data</div>
+          <div className="mb-2">Silahkan Masukkan Judul Data<span className="text-red-500">*</span></div>
           <input
             type="text"
             name="title"
@@ -131,7 +131,7 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Silahkan Masukkan Deskripsi Data</div>
+          <div className="mb-2">Silahkan Masukkan Deskripsi Data<span className="text-red-500">*</span></div>
           <input
             type="text"
             name="description"
@@ -143,7 +143,7 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Silahkan Masukkan Kategori Data</div>
+          <div className="mb-2">Silahkan Masukkan Kategori Data<span className="text-red-500">*</span></div>
           <input
             type="text"
             name="category"
@@ -155,7 +155,7 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Tanggal Data di Rilis</div>
+          <div className="mb-2">Tanggal Data di Rilis<span className="text-red-500">*</span></div>
             <input
               type="date"
               name="dateat"
@@ -168,7 +168,7 @@ const UploadDataComponent: React.FC = () => {
             />
         </div>
         <div className="space-y-2 spacex-x-2">
-          <div>Silahkan Pilih File Komponen Data</div>
+          <div>Silahkan pilih file yang ingin dimasukkan sebagai komponen data<span className="text-red-500">*</span></div>
           <label
             htmlFor="file"
             className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
@@ -187,7 +187,7 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div className="space-y-2 spacex-x-2">
-          <div>Silahkan Pilih File Tautan</div>
+          <div>Silahkan pilih file yang ingin dimasukkan sebagai tautan</div>
           <label
             htmlFor="realfile"
             className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
@@ -239,7 +239,7 @@ const UploadDataComponent: React.FC = () => {
         )}
       </form>
       <div className="font-bold text-3xl text-gray-700 mt-8 mb-4">
-        Tabel Data Post
+        Daftar Kumpulan Data
       </div>
       <ListDataPostAdmin />
     </div>

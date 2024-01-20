@@ -62,21 +62,21 @@ export const LayoutDashboard = ({
                           </a> 
                       </li>
                       <li>
-                          <a href="/admin/dashboard/data" className={`${pathname == '/admin/dashboard/data' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
+                          <a href="/admin/dashboard/data" className={`${pathname.startsWith('/admin/dashboard/data/') && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <DocumentIcon className="w-5 h-5"/>
                             <span>
                               Open Data
                             </span>
                           </a> 
                       </li>
-                      <li>
+                      {/* <li>
                           <a href="/admin/dashboard/user" className={`${pathname == '/admin/dashboard/user' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <UserIcon className="w-5 h-5"/>
                             <span>
                               Users
                             </span>
                           </a> 
-                      </li>
+                      </li> */}
                       <li>
                           <a href="/admin/dashboard/book" className={`${pathname == '/admin/dashboard/book' && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <BookOpenIcon className="w-5 h-5"/>

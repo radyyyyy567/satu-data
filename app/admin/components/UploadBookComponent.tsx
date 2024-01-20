@@ -88,11 +88,11 @@ const UploadBookComponent: React.FC = () => {
     <div className="p-4">
       <ToastContainer />
       <div>
-        <div className="font-bold text-2xl">Upload Data</div>
+        <div className="font-bold text-2xl">Upload Data Sektoral</div>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 pt-8">
         <div>
-          <div className="mb-2">Silahkan Masukkan Judul Buku</div>
+          <div className="mb-2">Silahkan Masukkan Judul Buku<span className="text-red-500">*</span></div>
           <input
             type="text"
             name="title"
@@ -104,7 +104,7 @@ const UploadBookComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Silahkan Masukkan Tahu Buku</div>
+          <div className="mb-2">Silahkan Masukkan Tahun Buku<span className="text-red-500">*</span></div>
           <input
             type="number"
             name="year"
@@ -116,7 +116,7 @@ const UploadBookComponent: React.FC = () => {
           />
         </div>
         <div className="space-y-2 spacex-x-2">
-          <div>Silahkan pilih file buku yang ingin di upload</div>
+          <div>Silahkan pilih file buku yang ingin di upload<span className="text-red-500">*</span></div>
           <label
             htmlFor="file"
             className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
@@ -170,7 +170,7 @@ const UploadBookComponent: React.FC = () => {
           }
       </form>
       <div className="font-bold text-3xl text-gray-700 mt-8 mb-4">
-        Tabel Book Post
+        Daftar Data Sektoral
       </div>
       <ListBookPostAdmin />
     </div>
