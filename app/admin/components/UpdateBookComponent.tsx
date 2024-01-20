@@ -116,7 +116,7 @@ const UpdateBookComponent: React.FC<UpdateBookComponent> = ({id}) => {
           />
         </div>
         <div>
-          <div className="mb-2">Silahkan Masukkan Tahu Buku</div>
+          <div className="mb-2">Silahkan Masukkan Tahun Buku</div>
           <input
             type="number"
             name="year"
