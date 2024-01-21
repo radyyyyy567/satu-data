@@ -32,7 +32,7 @@ const DetailDataPostClientComponent: React.FC<
         const day = dateObject.getDate().toString().padStart(2, "0");
 
         // Set the year, month, and day to the state variable
-        setDate(`${year}-${month}-${day}`);
+        setDate(`${day}-${month}-${year}`);
 
         setLoading(false);
       } catch (error) {

@@ -71,14 +71,18 @@ const ListDataPost = () => {
         style: { overflowWrap: "break-word" },
       },
       {
-        name: <div>Publish</div>,
+        name: <div>Tanggal di Publish</div>,
         selector: (row: FileData) => row.createdAt,
         sortable: true,
         format: (row: FileData) => {
-          const formattedDate = new Date(row.createdAt).toISOString().split('T')[0];
+          const date = new Date(row.createdAt);
+          const formattedDate = date.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+          });
           return formattedDate;
         },
-        
       },
       {
         name: <div>Rilis</div>,

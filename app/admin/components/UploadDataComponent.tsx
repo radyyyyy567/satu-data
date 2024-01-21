@@ -4,8 +4,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ListDataPostAdmin from "./ListDataPostAdmin";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const UploadDataComponent: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -78,7 +78,7 @@ const UploadDataComponent: React.FC = () => {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("category", category);
-    formData.append("dateat", dateAt ? dateAt.toLocaleDateString('en-GB') : "");
+    formData.append("dateat", dateAt ? dateAt.toLocaleDateString("en-GB") : "");
 
     try {
       const response = await axios.post("/api/file", formData, {
@@ -172,16 +172,18 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-      <div className="mb-2">Tanggal Data di Rilis<span className="text-red-500">*</span></div>
-      <DatePicker
-        selected={dateAt}
-        onChange={handleDateAtChange}
-        maxDate={new Date()}
-        required
-        showPopperArrow={false}  // This hides the icon
-        className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
-      />
-    </div>
+          <div className="mb-2">
+            Tanggal Data di Rilis<span className="text-red-500">*</span>
+          </div>
+          <DatePicker
+            selected={dateAt}
+            onChange={handleDateAtChange}
+            maxDate={new Date()}
+            required
+            showPopperArrow={false} // This hides the icon
+            className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
+          />
+        </div>
         <div className="space-y-2 spacex-x-2">
           <div>
             Silahkan pilih file yang ingin dimasukkan sebagai komponen data
