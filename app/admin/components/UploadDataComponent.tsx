@@ -4,6 +4,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ListDataPostAdmin from "./ListDataPostAdmin";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const UploadDataComponent: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -14,9 +16,8 @@ const UploadDataComponent: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [dateAt, setDateAt] = useState("");
-  const today = new Date().toISOString().split('T')[0];
-
+  const [dateAt, setDateAt] = useState<Date | null>(null);
+  const today = new Date().toISOString().split("T")[0];
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -52,8 +53,8 @@ const UploadDataComponent: React.FC = () => {
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-  const handleDateAtChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDateAt(e.target.value);
+  const handleDateAtChange = (date: Date | null) => {
+    setDateAt(date);
   };
   const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
@@ -64,18 +65,20 @@ const UploadDataComponent: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!realFile || !file || !title) {
-      alert("Please select a file and provide a title.");
+    if (!file || !title) {
+      toast.warning("Please select a file and provide a title.");
       return;
     }
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("realfile", realFile);
+    if (realFile) {
+      formData.append("realfile", realFile);
+    }
     formData.append("title", title);
     formData.append("description", description);
     formData.append("category", category);
-    formData.append("dateat", dateAt); 
+    formData.append("dateat", dateAt ? dateAt.toLocaleDateString('en-GB') : "");
 
     try {
       const response = await axios.post("/api/file", formData, {
@@ -92,6 +95,12 @@ const UploadDataComponent: React.FC = () => {
         },
       });
       setLoading(true);
+      setTitle("");
+      setDescription("");
+      setCategory("");
+      setDateAt(null);
+      setFile(null);
+      setRealFile(null);
       toast.success("Upload Data Berhasil");
     } catch (error: any) {
       console.log(error.response.data.message);
@@ -119,7 +128,9 @@ const UploadDataComponent: React.FC = () => {
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 pt-8">
         <div>
-          <div className="mb-2">Silahkan Masukkan Judul Data<span className="text-red-500">*</span></div>
+          <div className="mb-2">
+            Silahkan Masukkan Judul Data<span className="text-red-500">*</span>
+          </div>
           <input
             type="text"
             name="title"
@@ -131,7 +142,10 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Silahkan Masukkan Deskripsi Data<span className="text-red-500">*</span></div>
+          <div className="mb-2">
+            Silahkan Masukkan Deskripsi Data
+            <span className="text-red-500">*</span>
+          </div>
           <input
             type="text"
             name="description"
@@ -143,7 +157,10 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Silahkan Masukkan Kategori Data<span className="text-red-500">*</span></div>
+          <div className="mb-2">
+            Silahkan Masukkan Kategori Data
+            <span className="text-red-500">*</span>
+          </div>
           <input
             type="text"
             name="category"
@@ -155,20 +172,21 @@ const UploadDataComponent: React.FC = () => {
           />
         </div>
         <div>
-          <div className="mb-2">Tanggal Data di Rilis<span className="text-red-500">*</span></div>
-            <input
-              type="date"
-              name="dateat"
-              placeholder="masukkan tanggal"
-              value={dateAt}
-              onChange={handleDateAtChange}
-              max={today}
-              required
-              className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
-            />
-        </div>
+      <div className="mb-2">Tanggal Data di Rilis<span className="text-red-500">*</span></div>
+      <DatePicker
+        selected={dateAt}
+        onChange={handleDateAtChange}
+        maxDate={new Date()}
+        required
+        showPopperArrow={false}  // This hides the icon
+        className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
+      />
+    </div>
         <div className="space-y-2 spacex-x-2">
-          <div>Silahkan pilih file yang ingin dimasukkan sebagai komponen data<span className="text-red-500">*</span></div>
+          <div>
+            Silahkan pilih file yang ingin dimasukkan sebagai komponen data
+            <span className="text-red-500">*</span>
+          </div>
           <label
             htmlFor="file"
             className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
@@ -201,7 +219,6 @@ const UploadDataComponent: React.FC = () => {
             onChange={handleRealFileChange}
             accept=".xlsx, .xls"
             className="w-full"
-            required
             hidden
           />
         </div>
@@ -209,7 +226,9 @@ const UploadDataComponent: React.FC = () => {
           <button
             type="submit"
             className={`block w-full rounded-[5px] ${
-              buttonDisabled ? "bg-gray-500" : "active:bg-green-700 bg-green-500"
+              buttonDisabled
+                ? "bg-gray-500"
+                : "active:bg-green-700 bg-green-500"
             }  px-4 py-3 text-white font-semibold text-center`}
             disabled={buttonDisabled}
           >

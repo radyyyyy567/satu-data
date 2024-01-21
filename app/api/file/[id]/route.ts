@@ -74,6 +74,9 @@ export async function PATCH(req: Request) {
   }
 
   const file = formData.get("file") as File | undefined;
+  const realFile = formData.get("realfile") as File | undefined;
+  console.log(realFile);
+  let realFileNameCurrent: string | null = checkDataPost?.realfilename;
   let fileNameCurrent: string | undefined = checkDataPost?.filename;
 
   if (file) {
@@ -133,6 +136,66 @@ export async function PATCH(req: Request) {
       console.error("Error uploading file:", error.message);
     }
   }
+  if (realFile) {
+    const fileMaxSize = 2 * 1024 * 1024;
+    const fileExtension = utils.getFileExtension(realFile.name);
+
+    if (realFile.size > fileMaxSize) {
+      return NextResponse.json(
+        { message: "File terlalu besar untuk diupload" },
+        { status: 400 }
+      );
+    }
+
+    if (fileExtension !== "xlsx" && fileExtension !== "xls") {
+      return NextResponse.json({ error: "Hanya file excel yang dibolehkan" }, { status: 400 });
+    }
+
+    const realFileBuffer: ArrayBuffer = await realFile.arrayBuffer();
+    const fileNameHashed: string = utils.generateUniqueFileName(realFileBuffer, fileExtension);
+    console.log(fileNameHashed);
+    formData.append("realfileName", fileNameHashed);
+
+    realFileNameCurrent = fileNameHashed;
+
+    const cookieStore = cookies();
+    const token = cookieStore.get("next-auth.session-token");
+
+    if (checkDataPost?.realfilename) {
+      try {
+        await axios.delete(
+          `${process.env.NEXT_PUBLIC_API_URL}/products/real/${checkDataPost.realfilename}`,
+          {
+            headers: {
+              Authorization: `${token?.value}`,
+            },
+          }
+        );
+      } catch (error: any) {
+        // Handle the error if the delete request fails
+        console.error("Error deleting file:", error.message);
+      }
+    }
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/products`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `${token?.value}`,
+          },
+        }
+      );
+      // Handle the response if needed
+    } catch (error: any) {
+      // Handle the error if the post request fails
+      console.error("Error uploading file:", error.message);
+    }
+  }
+
+  console.log(realFileNameCurrent);
 
   try {
     const updateBookPost = await prisma.dataPost.update({
@@ -140,6 +203,7 @@ export async function PATCH(req: Request) {
       data: {
         title: title || checkDataPost.title,
         filename: fileNameCurrent || checkDataPost.filename,
+        realfilename: realFileNameCurrent || checkDataPost.realfilename,
         description: description || checkDataPost.description,
         category: category || checkDataPost.category,
         dataAt: dateAt || checkDataPost.dataAt,

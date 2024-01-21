@@ -19,10 +19,10 @@ const DetailDataPostClientComponent: React.FC<
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/file/${id}`);
-        const fetchedData = response.data.dataPostById;
+        const fetchedData = response.data.getDataPostById;
         console.log(fetchedData);
         setDataTitle(fetchedData);
-
+        console.log(response)
         // Convert the timestamp string to a Date object
         const dateObject = new Date(fetchedData.createdAt);
 
@@ -97,7 +97,8 @@ const DetailDataPostClientComponent: React.FC<
               </div>
             </div>
           </div>
-          <div className="p-8 rounded-tl-lg bg-white ">
+          {dataTitle.realfilename && 
+            <div className="p-8 rounded-tl-lg bg-white ">
             <div className="text-3xl font-semibold mb-8 ">
               Tautan
             </div>
@@ -109,6 +110,7 @@ const DetailDataPostClientComponent: React.FC<
               </div>
             </div>
           </div>
+          }
         </>
       )}
     </div>

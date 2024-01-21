@@ -3,8 +3,9 @@ import React, { ChangeEvent, useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ListDataPostAdmin from "./ListDataPostAdmin";
 import { useRouter } from "next/navigation";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface UpdateDataComponent {
     id: string
@@ -20,7 +21,7 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [dateAt, setDateAt] = useState("");
+  const [dateAt, setDateAt] = useState<Date | null>(null);
   const today = new Date().toISOString().split('T')[0];
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +58,8 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-  const handleDateAtChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDateAt(e.target.value);
+  const handleDateAtChange = (date: Date | null) => {
+    setDateAt(date);
   };
   const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
@@ -76,10 +77,11 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
 
     const formData = new FormData();
     formData.append("file", file || '');
+    formData.append("realfile", realFile || '');
     formData.append("title" , title);
     formData.append("description" , description);
     formData.append("category" , category);
-    formData.append("dateat" , dateAt); 
+    formData.append("dateat", dateAt ? dateAt.toLocaleDateString("en-GB") : "");
 
     try {
       const response = await axios.patch(`/api/file/${id}`, formData, {
@@ -108,29 +110,34 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
     }
   };
 
+  const convertStringToDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('/').map(Number);
+    return new Date(year, month - 1, day); // Month is zero-based in JavaScript Date objects
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/file/${id}`)
-        setTitle(response.data.getDataPostById.title)
-        setDescription(response.data.getDataPostById.description)
-        setCategory(response.data.getDataPostById.category)
-        const serverDataAt = response.data.getDataPostById.dataAt;
-        const parsedDate = serverDataAt ? new Date(serverDataAt).toISOString().split('T')[0] : "";
-        setDateAt(parsedDate);
-        console.log(response)
+        const response = await axios.get(`/api/file/${id}`);
+        setTitle(response.data.getDataPostById.title);
+        setDescription(response.data.getDataPostById.description);
+        setCategory(response.data.getDataPostById.category);
+        const dateAtString = response.data.getDataPostById.dataAt;
+        setDateAt(dateAtString ? convertStringToDate(dateAtString) : null);
+        console.log(response);
       } catch (error: any) {
         console.log(error);
       }
     };
     fetchData();
   }, [id]);
+  
 
   return (
     <div className="p-4">
       <ToastContainer />
       <div>
-        <div className="font-bold text-2xl">Upload Data</div>
+        <div className="font-bold text-2xl">Update Data</div>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 pt-8">
         <div>
@@ -170,17 +177,17 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
           />
         </div>
         <div>
-          <div className="mb-2">Tanggal Data Di Rilis</div>
-            <input
-              type="date"
-              name="dateat"
-              placeholder="masukkan tanggal"
-              value={dateAt}
-              onChange={handleDateAtChange}
-              max={today}
-              required
-              className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
-            />
+          <div className="mb-2">
+            Tanggal Data di Rilis<span className="text-red-500">*</span>
+          </div>
+          <DatePicker
+            selected={dateAt}
+            onChange={handleDateAtChange}
+            maxDate={new Date()}
+            required
+            showPopperArrow={false} // This hides the icon
+            className="rounded border ring-outline ring-blue-500 ring-0 focus:ring-2 py-2 px-4 w-full focus:outline-none"
+          />
         </div>
         <div className="space-y-2 spacex-x-2">
           <div>Silahkan Pilih File Komponen Data</div>
@@ -200,8 +207,8 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
             hidden
           />
         </div>
-        {/* <div className="space-y-2 spacex-x-2">
-          <div>Silahkan Pilih File Tautan</div>
+        <div className="space-y-2 spacex-x-2">
+          <div>Silahkan pilih file yang ingin dimasukkan sebagai tautan</div>
           <label
             htmlFor="realfile"
             className="inline-block transform bg-green-500 px-4 py-2 font-bold text-white active:scale-95 transition-all duration-200 rounded cursor-pointer"
@@ -215,10 +222,9 @@ const UpdateDataComponent: React.FC<UpdateDataComponent> = ({id}) => {
             onChange={handleRealFileChange}
             accept=".xlsx, .xls"
             className="w-full"
-            required
             hidden
           />
-        </div> */}
+        </div>
         <div className="flex items-center gap-x-2">
           <button
             type="submit"

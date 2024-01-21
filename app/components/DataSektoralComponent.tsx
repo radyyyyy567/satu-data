@@ -22,14 +22,6 @@ const DataSektoralComponent = () => {
             </div>
             <div className="mt-4 border border-bg-gray-300 rounded">
               <button
-                onClick={() => handleYear("2019")}
-                className={`${
-                  year === "2019" && "font-semibold" // Use the updated class name here
-                } border-b border-gray-300 w-full text-left px-4 py-2 transition duration-300 cursor-pointer odd:bg-gray-100 even:bg-white hover:text-blue-500 hover:border-b-blue-500`}
-              >
-                2019
-              </button>
-              <button
                 onClick={() => handleYear("2020")}
                 className={`${
                   year === "2020" && "font-semibold"

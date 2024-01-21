@@ -8,10 +8,10 @@ interface DetailDataPostAdminComponent {
   id: string;
 }
 
-const DetailDataPostAdminComponent: React.FC<
-  DetailDataPostAdminComponent
-> = ({ id }) => {
-  const [loading, setLoading] =  useState<boolean>(true);
+const DetailDataPostAdminComponent: React.FC<DetailDataPostAdminComponent> = ({
+  id,
+}) => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [dataTitle, setDataTitle] = useState<any>(null); // Update 'any' to your data structure
   const [date, setDate] = useState<string>("");
 
@@ -32,7 +32,7 @@ const DetailDataPostAdminComponent: React.FC<
         const day = dateObject.getDate().toString().padStart(2, "0");
 
         // Set the year, month, and day to the state variable
-        setDate(`${year}-${month}-${day}`);
+        setDate(`${day}/${month}/${year}`);
 
         setLoading(false);
       } catch (error) {
@@ -68,18 +68,14 @@ const DetailDataPostAdminComponent: React.FC<
               <div className="border flex">
                 <div className="w-6/12">
                   <div className=" border-b border-r px-4 py-2">Judul</div>
-                  <div className=" border-b border-r px-4 py-2">
-                    Deskripsi
-                  </div>
+                  <div className=" border-b border-r px-4 py-2">Deskripsi</div>
                   <div className=" border-b border-r px-4 py-2">
                     Tanggal di Rilis
                   </div>
                   <div className=" border-b border-r px-4 py-2">
                     Tanggal di Publish
                   </div>
-                  <div className=" border-b border-r px-4 py-2">
-                    Organisasi
-                  </div>
+                  <div className=" border-b border-r px-4 py-2">Organisasi</div>
                 </div>
                 <div className="w-6/12">
                   <div className="border-b bg-white px-4 py-2">
@@ -88,7 +84,9 @@ const DetailDataPostAdminComponent: React.FC<
                   <div className="border-b bg-white px-4 py-2">
                     {dataTitle.description}
                   </div>
-                  <div className="border-b bg-white px-4 py-2">{dataTitle.dataAt}</div>
+                  <div className="border-b bg-white px-4 py-2">
+                    {dataTitle.dataAt}
+                  </div>
                   <div className="border-b bg-white px-4 py-2">{date}</div>
                   <div className="border-b bg-white px-4 py-2">
                     {dataTitle.uploader.role}
@@ -97,14 +95,23 @@ const DetailDataPostAdminComponent: React.FC<
               </div>
             </div>
           </div>
+
           <div className="p-8 rounded-tl-lg bg-white ">
-            <div className="text-3xl font-semibold mb-8 ">
-              Tautan
-            </div>
+            <div className="text-3xl font-semibold mb-8">Tautan</div>
             <div className="">
-              <div className="border flex">
+              <div className="border flex rounded">
                 <div className="w-full">
-                  <a href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/real/${dataTitle.realfilename}/${dataTitle.title}`} className="block border-b border-r px-4 py-2 text-blue-500">{dataTitle.title}</a>                  
+                  {dataTitle.realfilename ? (
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/real/${dataTitle.realfilename}/${dataTitle.title}`}
+                      className="block border-b border-r px-4 py-2 text-blue-500"
+                    >
+                      {dataTitle.title}
+                    </a>
+                  ) : (
+                    <div className="text-gray-600 px-4 py-2">Tidak ada file yang ditautkan</div>
+                  )
+                }
                 </div>
               </div>
             </div>

@@ -122,7 +122,12 @@ const ListDataPostAdmin = () => {
         selector: (row: FileData) => row.createdAt,
         sortable: true,
         format: (row: FileData) => {
-          const formattedDate = new Date(row.createdAt).toISOString().split('T')[0];
+          const date = new Date(row.createdAt);
+          const formattedDate = date.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+          });
           return formattedDate;
         },
         width: "10%"

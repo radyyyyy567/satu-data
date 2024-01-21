@@ -62,7 +62,7 @@ export const LayoutDashboard = ({
                           </a> 
                       </li>
                       <li>
-                          <a href="/admin/dashboard/data" className={`${pathname.startsWith('/admin/dashboard/data/') && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
+                          <a href="/admin/dashboard/data" className={`${pathname.startsWith('/admin/dashboard/data') && "bg-gray-200"} flex space-x-2 items-center p-2 font-semibold text-[12px] w-full hover:bg-gray-200 rounded-lg`}>
                             <DocumentIcon className="w-5 h-5"/>
                             <span>
                               Open Data
