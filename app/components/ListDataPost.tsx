@@ -59,14 +59,20 @@ const ListDataPost = () => {
         selector: (row: FileData) => row.title,
         sortable: true,
         width: "",
+        cell: (row: FileData) => (
+          <div>{row.title}</div>
+        ),
         wrap: true,
         style: { overflowWrap: "break-word" },
       },
       {
-        name: 'OPD',
+        name: 'Organisasi',
         selector: (row: FileData) => row.uploader.role,
         sortable: true,
         width: "",
+        cell: (row: FileData) => (
+          <div>{row.uploader.role}</div>
+        ),
         wrap: true,
         style: { overflowWrap: "break-word" },
       },

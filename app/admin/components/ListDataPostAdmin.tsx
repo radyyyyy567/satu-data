@@ -83,15 +83,21 @@ const ListDataPostAdmin = () => {
         borderRight: "1px solid rgba(0,0,0,.12)"
       },
       {
-        name: 'Data',
+        name: 'Judul',
         selector: (row: FileData) => row.title,
         sortable: true,
+        cell: (row: FileData) => (
+          <div>{row.title}</div>
+        ),
         width: "20%"
       },
       {
         name: 'Pengupload',
         selector: (row: FileData) => row.uploader.username,
         sortable: true,
+        cell: (row: FileData) => (
+          <div>{row.uploader.username}</div>
+        ),
         width: "10%"
       },
       {
@@ -115,6 +121,9 @@ const ListDataPostAdmin = () => {
         name: 'Organisasi',
         selector: (row: FileData) => row.uploader.role,
         sortable: true,
+        cell: (row: FileData) => (
+          <div>{row.uploader.role}</div>
+        ),
         width: "10%"
       },
       {
@@ -136,6 +145,9 @@ const ListDataPostAdmin = () => {
         name:  <div>Tanggal di Rilis</div>,
         selector: (row: FileData) => row.dataAt,
         sortable: true,
+        cell: (row: FileData) => (
+          <div>{row.dataAt}</div>
+        ),
         width: "10%"
       },
       {
@@ -209,6 +221,7 @@ const ListDataPostAdmin = () => {
           },
           cells: {
             style: {
+              overflowWrap: "break-word",
               textOverflow: "unset",
               padding: "5px",
               margin: "0px",
@@ -216,6 +229,7 @@ const ListDataPostAdmin = () => {
               alignItems: "start"
             }
           },
+          
           rows: {
             style: {
               textOverflow: "unset",

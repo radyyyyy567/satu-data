@@ -11,7 +11,7 @@ interface DetailDataPostClientComponent {
 const DetailDataPostClientComponent: React.FC<
   DetailDataPostClientComponent
 > = ({ id }) => {
-  const [loading, setLoading] =  useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [dataTitle, setDataTitle] = useState<any>(null); // Update 'any' to your data structure
   const [date, setDate] = useState<string>("");
 
@@ -22,7 +22,7 @@ const DetailDataPostClientComponent: React.FC<
         const fetchedData = response.data.getDataPostById;
         console.log(fetchedData);
         setDataTitle(fetchedData);
-        console.log(response)
+        console.log(response);
         // Convert the timestamp string to a Date object
         const dateObject = new Date(fetchedData.createdAt);
 
@@ -32,7 +32,7 @@ const DetailDataPostClientComponent: React.FC<
         const day = dateObject.getDate().toString().padStart(2, "0");
 
         // Set the year, month, and day to the state variable
-        setDate(`${day}-${month}-${year}`);
+        setDate(`${day}/${month}/${year}`);
 
         setLoading(false);
       } catch (error) {
@@ -72,7 +72,7 @@ const DetailDataPostClientComponent: React.FC<
                 </div>
                 <div className="grid grid-cols-2 divide-x-[1px]">
                   <div className="p-2">Deskripsi</div>
-                  <div className="p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos odit distinctio quia ad blanditiis molestias a aut fuga ullam suscipit.</div>
+                  <div className="p-2">{dataTitle.description}</div>
                 </div>
                 <div className="grid grid-cols-2 divide-x-[1px]">
                   <div className="p-2">Tanggal di Rilis</div>
@@ -89,20 +89,25 @@ const DetailDataPostClientComponent: React.FC<
               </div>
             </div>
           </div>
-          {dataTitle.realfilename && 
-            <div className="p-8 rounded-tl-lg bg-white ">
-            <div className="text-3xl font-semibold mb-8 ">
-              Tautan
-            </div>
-            <div className="">
-              <div className="border flex">
-                <div className="w-full">
-                  <a href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/real/${dataTitle.realfilename}/${dataTitle.title}`} className="block border-b border-r px-4 py-2 text-blue-500">{dataTitle.title}</a>                  
+          <div className="p-8 rounded-tl-lg bg-white ">
+              <div className="text-3xl font-semibold mb-8 ">Tautan</div>
+              <div className="">
+                <div className="border flex">
+                  <div className="w-full">
+                  {dataTitle.realfilename ? (
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/real/${dataTitle.realfilename}/${dataTitle.title}`}
+                      className="block border-b border-r px-4 py-2 text-blue-500"
+                    >
+                      {dataTitle.title}
+                    </a>
+                  ) : (
+                    <div className="px-4 py-2 text-gray-500">Tidak terdapat tautan</div>
+                  )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          }
         </>
       )}
     </div>

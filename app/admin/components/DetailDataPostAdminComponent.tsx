@@ -65,42 +65,40 @@ const DetailDataPostAdminComponent: React.FC<DetailDataPostAdminComponent> = ({
               {dataTitle.title}
             </div>
             <div className="">
-              <div className="border flex">
-                <div className="w-6/12">
-                  <div className=" border-b border-r px-4 py-2">Judul</div>
-                  <div className=" border-b border-r px-4 py-2">Deskripsi</div>
-                  <div className=" border-b border-r px-4 py-2">
-                    Tanggal di Rilis
-                  </div>
-                  <div className=" border-b border-r px-4 py-2">
-                    Tanggal di Publish
-                  </div>
-                  <div className=" border-b border-r px-4 py-2">Organisasi</div>
+              <div className="border divide-y-[1px]">
+                <div className="grid grid-cols-2 divide-x-[1px]">
+                  <div className="p-2">Judul</div>
+                  <div className="p-2">{dataTitle.title}</div>
                 </div>
-                <div className="w-6/12">
-                  <div className="border-b bg-white px-4 py-2">
-                    {dataTitle.title}
+                <div className="grid grid-cols-2 divide-x-[1px]">
+                  <div className="p-2">Deskripsi</div>
+                  <div className="p-2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quos odit distinctio quia ad blanditiis molestias a aut fuga
+                    ullam suscipit.
                   </div>
-                  <div className="border-b bg-white px-4 py-2">
-                    {dataTitle.description}
-                  </div>
-                  <div className="border-b bg-white px-4 py-2">
-                    {dataTitle.dataAt}
-                  </div>
-                  <div className="border-b bg-white px-4 py-2">{date}</div>
-                  <div className="border-b bg-white px-4 py-2">
-                    {dataTitle.uploader.role}
-                  </div>
+                </div>
+                <div className="grid grid-cols-2 divide-x-[1px]">
+                  <div className="p-2">Tanggal di Rilis</div>
+                  <div className="p-2">{dataTitle.dataAt}</div>
+                </div>
+                <div className="grid grid-cols-2 divide-x-[1px]">
+                  <div className="p-2">Tanggal di Publish</div>
+                  <div className="p-2">{date}</div>
+                </div>
+                <div className="grid grid-cols-2 divide-x-[1px]">
+                  <div className="p-2">Organisasi</div>
+                  <div className="p-2">{dataTitle.uploader.role}</div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="p-8 rounded-tl-lg bg-white ">
-            <div className="text-3xl font-semibold mb-8">Tautan</div>
-            <div className="">
-              <div className="border flex rounded">
-                <div className="w-full">
+          
+            <div className="p-8 rounded-tl-lg bg-white ">
+              <div className="text-3xl font-semibold mb-8 ">Tautan</div>
+              <div className="">
+                <div className="border flex">
+                  <div className="w-full">
                   {dataTitle.realfilename ? (
                     <a
                       href={`${process.env.NEXT_PUBLIC_API_URL}/products/download/real/${dataTitle.realfilename}/${dataTitle.title}`}
@@ -109,13 +107,13 @@ const DetailDataPostAdminComponent: React.FC<DetailDataPostAdminComponent> = ({
                       {dataTitle.title}
                     </a>
                   ) : (
-                    <div className="text-gray-600 px-4 py-2">Tidak ada file yang ditautkan</div>
-                  )
-                }
+                    <div className="px-4 py-2 text-gray-500">Tidak terdapat tautan</div>
+                  )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          
         </>
       )}
     </div>
