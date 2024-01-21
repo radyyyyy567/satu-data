@@ -19,14 +19,13 @@ const DetailDataClientComponent: React.FC<
       try {
         // First, fetch data from '/api/file/{id}'
         const fileResponse = await axios.get(`/api/file/${id}`);
-        const dataPost = fileResponse.data.dataPostById;
+        const dataPost = fileResponse.data.getDataPostById;
         const fileName = dataPost.filename;
         // Next, use the filename to fetch data from 'http://localhost:5000/products/{filename}'
         const productsResponse = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/products/${fileName}`
         );
         const rawData = productsResponse.data.data;
-
         const extractedData = rawData.map((entry: any) => {
           return entry.hasOwnProperty("data") ? entry.data : entry;
         });
@@ -39,7 +38,7 @@ const DetailDataClientComponent: React.FC<
           // Add a new column for the number index    
           const generatedColumns = [...keys.map((key) => ({
             name: <div>{key}</div>,
-            selector: key,
+            selector: (row: any) => key,
             sortable: true,
             style: { overflowWrap: "break-word" },
             cell: (row: any) => <div>{row[key]}</div>,
