@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth"
 import prisma from "./../../../lib/prisma"
 import axios from "axios";
 import { cookies } from "next/headers";
+import { getData } from "./function/Index";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
@@ -120,19 +121,9 @@ function getFileExtension(filename: string): string {
 
 export async function GET() {
   try {
+    const result = await getData();
 
-    const getAllDataPost = await prisma.dataPost.findMany({
-      include: {
-        uploader: {
-          select: {
-            username: true,
-            role: true
-          }
-        }
-      }
-    })
-
-    return NextResponse.json({ AllDataPost: getAllDataPost }, { status: 200 })
+    return NextResponse.json({ AllDataPost: result, message: "Data Berhasil di Dapat" },{ status: 200})
   } catch (error: any) {
     return NextResponse.json({ message: "Ada kesalahan saat mengambil data" + error.message})
   }

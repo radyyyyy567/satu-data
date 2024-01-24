@@ -33,7 +33,7 @@ const ListDataPost = () => {
 
   const getFileData = async () => {
     try {
-      const response = await axios.get('/api/file/publish');
+      const response = await axios.get('/api/publish');
       setData(response.data.allPublishDataPost.reverse() || []);
       setLoading(false);
     } catch (error: any) {

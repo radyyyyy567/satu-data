@@ -1,10 +1,17 @@
-import prisma from "@/lib/prisma";
+import { getDataPublish } from "../file/function/Index";
+import prisma from "./../../../lib/prisma"
 import { NextResponse } from "next/server";
-import { getDataPublish } from "../function/Index";
+
+
+export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
     try {
       const result = await getDataPublish();
+
+      if (!result) {
+        return NextResponse.json({ message: "Tidak ada data yang di publish"});
+      }
       return NextResponse.json(
         {
           allPublishDataPost: result,
