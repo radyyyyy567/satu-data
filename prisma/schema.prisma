@@ -38,10 +38,8 @@ model DataPost {
   filename      String
   realfilename  String?
   category      String
-  publish       DateTime?
   dataAt        String?
   archive       Boolean @default(true)
-  linkdrive     String? 
   uploader      User @relation(fields: [uploaderId], references: [id])
   uploaderId    String
   createdAt     DateTime  @default(now())

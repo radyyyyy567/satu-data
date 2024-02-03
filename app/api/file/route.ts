@@ -79,7 +79,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         archive: false,
         filename: fileNameHashed,
         realfilename: realFileNameHashed || null,
-        linkdrive: null,
         uploaderId: session.user.id,
       },
     });

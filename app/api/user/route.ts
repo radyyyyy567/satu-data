@@ -17,12 +17,12 @@ interface User {
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions)
-    const roleSession = await session?.user.role
+    // const session = await getServerSession(authOptions)
+    // const roleSession = await session?.user.role
 
-    if (!session || roleSession !== "admin") {
-    return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
-    }
+    // if (!session || roleSession !== "admin") {
+    // return NextResponse.json({ user: null, message: "Unauthorized" }, { status: 401 });
+    // }
     const body: User = await req.json();
     const { username, email, password, confPassword, role } = body;
 

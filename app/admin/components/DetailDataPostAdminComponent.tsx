@@ -49,18 +49,7 @@ const DetailDataPostAdminComponent: React.FC<DetailDataPostAdminComponent> = ({
         <div>Loading...</div>
       ) : (
         <>
-          <div className="flex justify-end">
-            <div className="bg-white p-2 rounded-t-lg">
-              <span className="py-2 px-4 bg-blue-500 space-x-2 flex items-center text-white font-semibold h-[40px] rounded">
-                <ArrowDownCircleIcon className="w-5 h-5" />
-                <FileDownloadComponent
-                  fileName={dataTitle.filename}
-                  title={dataTitle.title}
-                />
-              </span>
-            </div>
-          </div>
-          <div className="p-8 rounded-tl-lg bg-white ">
+          <div className="px-8 pt-8 rounded-tl-lg bg-white ">
             <div className="text-3xl font-semibold mb-8 ">
               {dataTitle.title}
             </div>
@@ -73,9 +62,7 @@ const DetailDataPostAdminComponent: React.FC<DetailDataPostAdminComponent> = ({
                 <div className="grid grid-cols-2 divide-x-[1px]">
                   <div className="p-2">Deskripsi</div>
                   <div className="p-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quos odit distinctio quia ad blanditiis molestias a aut fuga
-                    ullam suscipit.
+                    {dataTitle.description}
                   </div>
                 </div>
                 <div className="grid grid-cols-2 divide-x-[1px]">
@@ -95,7 +82,7 @@ const DetailDataPostAdminComponent: React.FC<DetailDataPostAdminComponent> = ({
           </div>
           
             <div className="p-8 rounded-tl-lg bg-white ">
-              <div className="text-3xl font-semibold mb-8 ">Tautan</div>
+              <div className="text-3xl font-semibold mb-4">Tautan</div>
               <div className="">
                 <div className="border flex">
                   <div className="w-full">
