@@ -62,7 +62,7 @@ const DetailDataAdminComponent: React.FC<FileDetailDataAdminComponentProps> = ({
     };
 
     fetchData();
-  }, [id]);
+  }, [id, dataDetail]);
 
   return (
     <div className="px-8 pb-8 w-full bg-white overflow-auto space-y-4 rounded-b-lg">

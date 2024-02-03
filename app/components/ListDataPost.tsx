@@ -91,7 +91,7 @@ const ListDataPost = () => {
         },
       },
       {
-        name: <div>Rilis</div>,
+        name: <div>Tanggal di Rilis</div>,
         selector: (row: FileData) => row.dataAt,
         sortable: true,
       },

@@ -21,7 +21,6 @@ export async function PATCH(req: Request) {
       },
       data: {
         archive: false,
-        publish: new Date(),
       },
     });
 

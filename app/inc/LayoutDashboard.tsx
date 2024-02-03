@@ -196,7 +196,7 @@ export const LayoutDashboard = ({
                 <div className="flex items-center">
                   <button className="active:bg-gray-100 p-2 rounded-full hover:bg-gray-50 transition duration-200">
                     <BellIcon className="w-5 h-5" />
-                  </button>
+                  </button>l
                   <button className="active:bg-gray-100 p-2 rounded-full hover:bg-gray-50 transition duration-200">
                     <MagnifyingGlassIcon className="w-5 h-5" />
                   </button>
