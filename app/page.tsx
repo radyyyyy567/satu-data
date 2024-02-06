@@ -54,14 +54,6 @@ export default function Home() {
             <SwiperSlide className="w-full pt-[70px] h-screen">
               <Image
                 loading="lazy"
-                src={bannerWeb3}
-                alt="logo-kabupaten-pelalawan.jpg"
-                className="w-full h-full object-cover"
-              />
-            </SwiperSlide>
-            <SwiperSlide className="w-full pt-[70px] h-screen">
-              <Image
-                loading="lazy"
                 src={bannerWeb4}
                 alt="logo-kabupaten-pelalawan.jpg"
                 className="w-full h-full object-cover"

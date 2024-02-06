@@ -25,7 +25,12 @@ const Navbar = () => {
   return (
     <>
       <section className=" bg-white h-[70px] w-full fixed top-0 shadow z-40">
-        <nav className="flex lg:max-w-5xl max-w-[340px] mx-auto h-full items-center justify-between">
+      <div className="absolute flex items-center text-red-500 top-0 right-10 h-full">
+            
+            <div>V. 1.0</div>
+          </div>
+        <nav className="relative flex lg:max-w-5xl max-w-[340px] mx-auto h-full items-center justify-between">
+          
           <div className="flex items-center space-x-3">
             <Image
               loading="lazy"

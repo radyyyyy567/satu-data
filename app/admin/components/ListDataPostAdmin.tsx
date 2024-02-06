@@ -17,6 +17,7 @@ interface FileData {
   archive: boolean;
   rowIndex: number;
   dataAt: string;
+  globalIndex:number;
   uploader: {
     username: string;
     role: string;
@@ -55,12 +56,18 @@ const ListDataPostAdmin = () => {
   const getFileData = async () => {
     try {
       const response = await axios.get('/api/file');
-      setData(response.data.AllDataPost.reverse() || []);
+      const updatedData = response.data.AllDataPost.map((item: FileData, index: number) => ({
+        ...item,
+        globalIndex: index + 1,
+      }));
+      setData(updatedData || []);
+      console.log(data);
     } catch (error: any) {
       setErrorMessage(error.response?.data?.message || 'An error occurred');
     }
   };
 
+  console.log(data)
   const deleteFile = async (id: string) => {
     try{
         const deleteFileSelected = await axios.delete('/api/file/' + id);
@@ -76,12 +83,12 @@ const ListDataPostAdmin = () => {
     
     // ... previous column definitions ...
     {
-        name: 'No.',
-        selector: (row: any, index: number) => index + 1,
-        sortable: true,
-        width: "5%",
-        borderRight: "1px solid rgba(0,0,0,.12)"
-      },
+      name: <div>No.</div>,
+      selector: (row: FileData) => row.globalIndex,
+      sortable: true,
+      cell: (row: FileData) => <div>{row.globalIndex}</div>,
+      width: "5%",
+    },
       {
         name: 'Judul',
         selector: (row: FileData) => row.title,

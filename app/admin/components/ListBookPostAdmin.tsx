@@ -1,10 +1,10 @@
-"use client"
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import DataTable from 'react-data-table-component';
-import Link from 'next/link';
-import FileDownloadComponent from './FileDownloadComponent';
-import { toast } from 'react-toastify';
+"use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import Link from "next/link";
+import FileDownloadComponent from "./FileDownloadComponent";
+import { toast } from "react-toastify";
 
 interface FileData {
   id: string;
@@ -15,113 +15,126 @@ interface FileData {
   linkdrive: string;
   rowIndex: number;
   year: string;
+  globalIndex: number;
   uploader: {
     username: string;
     role: string;
   };
   createdAt: string;
-  
 }
-
-
 
 const ListBookPostAdmin = () => {
   const [data, setData] = useState<FileData[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
   useEffect(() => {
     getFileData();
   }, [data]);
 
   const getFileData = async () => {
     try {
-      const response = await axios.get('/api/book');
-      setData(response.data.AllDataPost.reverse() || []);
+      const response = await axios.get("/api/book");
+      const updatedData = response.data.AllDataPost.map(
+        (item: FileData, index: number) => ({
+          ...item,
+          globalIndex: index + 1,
+        })
+      );
+      setData(updatedData || []);
     } catch (error: any) {
-      setErrorMessage(error.response?.data?.message || 'An error occurred');
+      setErrorMessage(error.response?.data?.message || "An error occurred");
     }
   };
 
   const deleteFile = async (id: string) => {
-    try{
-        const deleteFileSelected = await axios.delete('/api/book/' + id);
-        getFileData();
-        toast.success("Buku Berhasil Dihapus")
-    } catch (error: any){
-        toast.error("Buku Gagal Dihapus " + error.response?.data?.message)
+    try {
+      const deleteFileSelected = await axios.delete("/api/book/" + id);
+      getFileData();
+      toast.success("Buku Berhasil Dihapus");
+    } catch (error: any) {
+      toast.error("Buku Gagal Dihapus " + error.response?.data?.message);
     }
-  }
-  
-  
+  };
+
   const columns: any = [
-    
     // ... previous column definitions ...
     {
-        name: 'No.',
-        selector: (row: any, index: number) => index + 1,
-        sortable: true,
-        cell: (row: any, index: number) => (
-          <div className="w-[10px]">{index + 1}</div>
-        ),
-        width: "5%",
-        borderRight: "1px solid rgba(0,0,0,.12)"
-      },
-      {
-        name: 'Judul',
-        selector: (row: FileData) => row.title,
-        sortable: true,
-        width: ""
-      },
-      {
-        name: 'Pengupload',
-        selector: (row: FileData) => row.uploader.username,
-        sortable: true,
-        width: "12%"
-      },
-      {
-        name: 'Organisasi',
-        selector: (row: FileData) => row.uploader.role,
-        sortable: true,
-        width: "12%"
-      },
-      {
-        name: <div>Tanggal di Publish</div>,
-        selector: (row: FileData) => row.createdAt,
-        sortable: true,
-        format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
-        width: "12%"
-      },
-      {
-        name: 'Tahun',
-        selector: (row: FileData) => row.year,
-        sortable: true,
-        width: "12%"
-      },
-      {
-        name: 'Download',
-        cell: (row: FileData) => (
-          <div className='p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200'>
-            {
-              row.linkdrive ? <a href={row.linkdrive} target="_blank" >Download</a> : <FileDownloadComponent fileName={row.filename} title={row.title}/>
-            }
-          </div>
-        ),
-        width: "12%"
-      },
-      {
-        name: 'Opsi',
-        cell: (row: FileData) => (
-          <div className='flex space-x-2'>
-            <a href={`book/${row.id}`} className='block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150'>EDIT</a>
-            <button onClick={() => deleteFile(row.id)} className='p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150'>DELETE</button>
-          </div>
-        )
-      }
+      name: <div>No.</div>,
+      selector: (row: FileData) => row.globalIndex,
+      sortable: true,
+      cell: (row: FileData) => <div>{row.globalIndex}</div>,
+      width: "5%",
+    },
+    {
+      name: "Judul",
+      selector: (row: FileData) => row.title,
+      sortable: true,
+      width: "",
+    },
+    {
+      name: "Pengupload",
+      selector: (row: FileData) => row.uploader.username,
+      sortable: true,
+      width: "12%",
+    },
+    {
+      name: "Organisasi",
+      selector: (row: FileData) => row.uploader.role,
+      sortable: true,
+      width: "12%",
+    },
+    {
+      name: <div>Tanggal di Publish</div>,
+      selector: (row: FileData) => row.createdAt,
+      sortable: true,
+      format: (row: FileData) => new Date(row.createdAt).toLocaleDateString(),
+      width: "12%",
+    },
+    {
+      name: "Tahun",
+      selector: (row: FileData) => row.year,
+      sortable: true,
+      width: "12%",
+    },
+    {
+      name: "Download",
+      cell: (row: FileData) => (
+        <div className="p-2 bg-blue-800 text-white font-semibold rounded active:scale-95 transform transition duration-200">
+          {row.linkdrive ? (
+            <a href={row.linkdrive} target="_blank">
+              Download
+            </a>
+          ) : (
+            <FileDownloadComponent fileName={row.filename} title={row.title} />
+          )}
+        </div>
+      ),
+      width: "12%",
+    },
+    {
+      name: "Opsi",
+      cell: (row: FileData) => (
+        <div className="flex space-x-2">
+          <a
+            href={`book/${row.id}`}
+            className="block text-xs p-2 rounded bg-blue-500 text-white font-bold active:scale-95 transfrom transition duration-150"
+          >
+            EDIT
+          </a>
+          <button
+            onClick={() => deleteFile(row.id)}
+            className="p-2 text-xs rounded bg-red-500 text-white font-bold active:scale-95 transfrom transition duration-150"
+          >
+            DELETE
+          </button>
+        </div>
+      ),
+    },
   ];
 
   return (
     <div className="">
       <DataTable
-        className='max-w-auto '
+        className="max-w-auto "
         columns={columns}
         data={data}
         responsive
@@ -130,8 +143,8 @@ const ListBookPostAdmin = () => {
         customStyles={{
           table: {
             style: {
-              borderLeft: "1px solid rgba(0,0,0,.12)"
-            }
+              borderLeft: "1px solid rgba(0,0,0,.12)",
+            },
           },
           headCells: {
             style: {
@@ -142,8 +155,8 @@ const ListBookPostAdmin = () => {
               color: "white",
               fontWeight: "700",
               textOverflow: "unset",
-              overflowWrap: "break-word"
-            }
+              overflowWrap: "break-word",
+            },
           },
           cells: {
             style: {
@@ -151,16 +164,15 @@ const ListBookPostAdmin = () => {
               padding: "5px",
               margin: "0px",
               borderRight: "1px solid rgba(0,0,0,.12)",
-              alignItems: "start"
-            }
+              alignItems: "start",
+            },
           },
           rows: {
             style: {
               textOverflow: "unset",
-            }
+            },
           },
         }}
-        
       />
     </div>
   );

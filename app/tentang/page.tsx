@@ -10,7 +10,7 @@ const page = () => {
         <div className="max-w-5xl mx-auto mt-[70px] py-[30px]">
           <DirectStatus namePage={namePage} />
         </div>
-      </section>https://github.com/radyyyyy567/satu-data?search=1
+      </section>
       <section className="bg-gray-100 py-[30px]">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center text-[#444] space-y-6">
